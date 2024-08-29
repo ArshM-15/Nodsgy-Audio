@@ -9,11 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "firebase-functions": "^5.0.1",
+    "fs": "^0.0.1-security",
     "next": "^14.2.5",
+    "node-fetch": "^3.3.2",
+    "officeparser": "^4.1.1",
+    "openai": "^4.55.4",
+    "path": "^0.12.7",
+    "pdf-extract": "^1.0.11",
+    "pdf-lib": "^1.17.1",
+    "pdf-parse": "^1.1.1",
+    "pdf-poppler": "^0.2.1",
+    "pdf.js-extract": "^0.2.1",
+    "pdfjs-dist": "^4.5.136",
+    "pptx2json": "^0.0.10",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^5.2.1"
+    "react-icons": "^5.2.1",
+    "react-seekbar": "^0.1.4",
+    "textract": "^2.5.0",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "eslint": "^8",
