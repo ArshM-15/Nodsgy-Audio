@@ -1,14 +1,18 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { Seekbar } from "react-seekbar";
 import { LuShare } from "react-icons/lu";
+import { IoIosArrowDown } from "react-icons/io";
+import { GrPlayFill, GrPauseFill } from "react-icons/gr";
 
-const AudioComponent = ({ src, name }) => {
+const AudioComponent = ({ src, name, keyPoints }) => {
   const [play, setPlay] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [position, setPosition] = useState(0);
   const [audioDuration, setAudioDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+
   const audioRef = useRef(null);
 
   const toggleAudio = () => {
@@ -95,18 +99,26 @@ const AudioComponent = ({ src, name }) => {
       audio.addEventListener("loadedmetadata", updateDuration);
     };
   }, []);
+  const toggleKeyPoints = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-4 shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)] w-[95%] md:w-[50%] py-5 rounded-xl mx-auto mt-10">
-      <p className="font-semibold text-[20px] text-center">{name}</p>
+    <div className="flex flex-col justify-center items-center space-y-4 w-[95%] md:w-[55%] py-7 rounded-xl mx-auto mt-10 shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)]">
+      <p className="font-semibold sm:text-[25px] text-[22px] text-center w-[90%]">
+        {name}
+      </p>
+
       <div className="flex items-center space-x-2">
         <span className="w-8">{formatTime(currentTime)}</span>
+
         <Seekbar
           position={position}
           duration={100}
           onSeek={handleSeek}
           className="custom-seekbar"
         />
+
         <span className="w-8">{formatTime(audioDuration)}</span>
       </div>
       <div className="flex justify-between items-center w-[90%]">
@@ -132,12 +144,15 @@ const AudioComponent = ({ src, name }) => {
           className="bg-yellow p-5 w-max rounded-full"
         >
           {!play ? (
-            <FaPlay
+            <GrPlayFill
               className="text-3xl text-black translate-x-[3px]"
               aria-hidden="true"
             />
           ) : (
-            <FaPause className="text-3xl text-black" aria-hidden="true" />
+            <GrPauseFill
+              className="text-3xl text-black font-extralight"
+              aria-hidden="true"
+            />
           )}
         </button>
         <button
@@ -150,6 +165,40 @@ const AudioComponent = ({ src, name }) => {
 
         <audio ref={audioRef} src={src} />
       </div>
+      {/* <p
+        onClick={toggleKeyPoints}
+        className="cursor-pointer hover:text-gray underline transition duration-200 font-normal text-[20px] flex items-center justify-between w-[88%]"
+      > */}
+      {/* <IoIosArrowDown
+          className={`transition-transform duration-300 ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
+        /> */}
+      <p
+        onClick={toggleKeyPoints}
+        className="mx-auto mt-[1rem] cursor-pointer hover:text-gray underline transition duration-200 font-normal text-[20px]"
+      >
+        Summary Points
+      </p>
+
+      {/* <IoIosArrowDown
+          className={`transition-transform duration-300 ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
+        /> */}
+      {/* </p> */}
+      {isOpen && (
+        <ul className="font-normal text-[20px] text-start w-[80%] list-disc ml-5 mt-4">
+          {keyPoints
+            .split("->")
+            .filter((point) => point.trim() !== "")
+            .map((point, index) => (
+              <li key={index} className="my-3">
+                {point.trim()}
+              </li>
+            ))}
+        </ul>
+      )}
     </div>
   );
 };

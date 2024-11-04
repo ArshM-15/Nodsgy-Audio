@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { FaPlay, FaPause } from "react-icons/fa";
+import React, { useRef, useState, useEffect } from "react";
+import { GrPlayFill, GrPauseFill } from "react-icons/gr";
 
 const ExplainAudio = () => {
   const [play, setPlay] = useState(false);
@@ -15,6 +15,24 @@ const ExplainAudio = () => {
     }
   }
 
+  useEffect(() => {
+    const audio = oceanRef.current;
+
+    const handleAudioEnd = () => {
+      setPlay(false);
+    };
+
+    if (audio) {
+      audio.addEventListener("ended", handleAudioEnd);
+    }
+
+    return () => {
+      if (audio) {
+        audio.removeEventListener("ended", handleAudioEnd);
+      }
+    };
+  }, []);
+
   return (
     <div className="flex justify-center items-center">
       <button
@@ -23,15 +41,15 @@ const ExplainAudio = () => {
         className="mx-auto bg-yellow p-5 w-max rounded-full sm:-my-10 my-5"
       >
         {!play ? (
-          <FaPlay
+          <GrPlayFill
             className="text-3xl text-black translate-x-[3px]"
             aria-hidden="true"
           />
         ) : (
-          <FaPause className="text-3xl text-black" aria-hidden="true" />
+          <GrPauseFill className="text-3xl text-black" aria-hidden="true" />
         )}
       </button>
-      <audio ref={oceanRef} loop src={"/explain-nodsgy.mp3"} />
+      <audio ref={oceanRef} loop={false} src={"/explain-nodsgy.mp3"} />
     </div>
   );
 };
