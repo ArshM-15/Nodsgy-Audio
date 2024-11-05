@@ -1,5 +1,7 @@
 import { parseOfficeAsync } from "officeparser";
 import OpenAI from "openai";
+import fs from "fs";
+import path from "path";
 
 const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
@@ -9,7 +11,7 @@ export async function POST(req) {
   try {
     // Create the officeParserTemp directory if it does not exist
     const tempDir = path.join(process.cwd(), "officeParserTemp");
-    if (!fs.existsSync(tempDir)) {
+    if (!s.existsSync(tempDir)) {
       fs.mkdirSync(tempDir, { recursive: true });
     }
 
