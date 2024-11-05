@@ -21,6 +21,7 @@ runConfig:
   # See https://firebase.google.com/docs/app-hosting/configure#secret-parameters
   # - variable: MY_SECRET
   #   secret: mySecretRef
+
 env:
   - variable: NEXT_PUBLIC_OPENAI_API_KEY
-    secret: openai-api-key
+    secret: next_public_openai-api-key
