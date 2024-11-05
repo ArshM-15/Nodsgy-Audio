@@ -3,9 +3,11 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { db, fileStorage } from "../../firebase/config";
 import OpenAI from "openai";
 
+console.log("Helllloooooooo");
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
 });
+
 let numOfChunks;
 export async function POST(req) {
   try {
