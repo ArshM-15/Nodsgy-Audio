@@ -7,6 +7,12 @@ const openai = new OpenAI({
 let numOfChunks;
 export async function POST(req) {
   try {
+    // Create the officeParserTemp directory if it does not exist
+    const tempDir = path.join(process.cwd(), "officeParserTemp");
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
+    }
+
     const formData = await req.formData();
     const file = formData.get("file");
 
@@ -26,16 +32,16 @@ export async function POST(req) {
     if (numOfChunks < 3 || numOfChunks > 5) {
       numOfChunks = 5;
     }
-    console.log("Number of chunksssss", numOfChunks);
+    console.log("Number of chunks", numOfChunks);
 
     const textChunks = splitTextIntoChunks(text, numOfChunks);
-    console.log("text chunjs", textChunks);
+    console.log("text chunks", textChunks);
 
     const subtopicsPromises = textChunks.map((chunk) =>
       generateSubtopic(chunk)
     );
     const subtopics = await Promise.all(subtopicsPromises);
-    console.log("text chunjsss", textChunks);
+    console.log("text subtopics", subtopics);
 
     return new Response(
       JSON.stringify({
@@ -44,7 +50,6 @@ export async function POST(req) {
         chunks: textChunks,
         numOfChunks: numOfChunks,
       }),
-
       {
         status: 200,
         headers: {
