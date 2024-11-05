@@ -11,7 +11,7 @@ export async function POST(req) {
   try {
     // Create the officeParserTemp directory if it does not exist
     const tempDir = path.join(process.cwd(), "officeParserTemp");
-    if (!s.existsSync(tempDir)) {
+    if (!fs.existsSync(tempDir)) {
       fs.mkdirSync(tempDir, { recursive: true });
     }
 
