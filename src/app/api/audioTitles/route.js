@@ -2,18 +2,26 @@ import { parseOfficeAsync } from "officeparser";
 import OpenAI from "openai";
 import fs from "fs";
 import path from "path";
+import { chdir } from "process";
 
 const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
 });
+
 let numOfChunks;
+
 export async function POST(req) {
   try {
-    // // Create the officeParserTemp directory if it does not exist
-    // const tempDir = path.join(process.cwd(), "officeParserTemp");
-    // if (!s.existsSync(tempDir)) {
-    //   fs.mkdirSync(tempDir, { recursive: true });
-    // }
+    // Save the original working directory
+    const originalCwd = process.cwd();
+
+    // Change the working directory to /tmp, where AWS Lambda allows write access
+    chdir("/tmp");
+
+    const tempDir = path.join(process.cwd(), "officeParserTemp");
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
+    }
 
     const formData = await req.formData();
     const file = formData.get("file");
@@ -26,9 +34,14 @@ export async function POST(req) {
 
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
+
+    // Parse the file within the /tmp directory
     const extractedData = await parseOfficeAsync(buffer);
     const text = extractedData.toString();
     console.log(text);
+
+    // Revert to the original working directory after parsing
+    chdir(originalCwd);
 
     await checkNumOfChunks(text);
     if (numOfChunks < 3 || numOfChunks > 5) {
@@ -86,10 +99,8 @@ async function checkNumOfChunks(text) {
   const returnedNumOfChunks = completion.choices[0].message.content.trim();
   console.log("Number of chunks", returnedNumOfChunks);
   numOfChunks = returnedNumOfChunks;
-  // return returnedNumOfChunks;
 }
 
-// Function to split text into equal parts
 function splitTextIntoChunks(text, numOfChunks) {
   const lines = text.split("\n");
   const chunkSize = Math.ceil(lines.length / numOfChunks);
@@ -105,7 +116,6 @@ function splitTextIntoChunks(text, numOfChunks) {
   return chunks;
 }
 
-// Function to generate a subtopic from a text chunk
 async function generateSubtopic(textChunk) {
   const completion = await openai.chat.completions.create({
     model: "gpt-4o-mini",
@@ -113,7 +123,7 @@ async function generateSubtopic(textChunk) {
       {
         role: "system",
         content:
-          "Generate a title from the following content. The title should summarize the key concept in this section of the content. Focus only on teachable concepts and nothing else. There shouldn't be any unnecessary special charecters in the title.",
+          "Generate a title from the following content. The title should summarize the key concept in this section of the content. Focus only on teachable concepts and nothing else. There shouldn't be any unnecessary special characters in the title.",
       },
       { role: "user", content: textChunk },
     ],
