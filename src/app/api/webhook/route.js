@@ -4,8 +4,6 @@ import { getFirestore } from "firebase-admin/firestore";
 import { getAuth } from "firebase-admin/auth";
 import serviceAccount from "../../firebase/serviceAccountKey.json"; // Adjust path as necessary
 
-// const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-
 // Initialize Stripe
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2024-09-30.acacia",
@@ -15,19 +13,12 @@ const endpointSecret = process.env.WEBHOOK_SECRET;
 // Initialize Firebase Admin SDK only if it hasn't been initialized yet
 if (!getApps().length) {
   initializeApp({
-    credential: cert(serviceAccount), // Use cert() with your service account key
+    credential: cert(serviceAccount),
   });
 }
 
 const db = getFirestore();
 const auth = getAuth();
-
-// Disable default body parsing to handle raw body for Stripe verification
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 
 export async function POST(req) {
   const signature = req.headers.get("stripe-signature");

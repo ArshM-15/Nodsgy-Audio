@@ -18,10 +18,11 @@ export default function Success() {
     } else {
       setUserSpent(19.99);
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <div className="md:mt-[10rem] text-center">
+    <div className="md:mt-[15rem] text-center h-[50vh]">
       <h1 className="font-bold text-[35px] text-center w-[85%] mx-auto">
         Thank you for your purchase!
       </h1>

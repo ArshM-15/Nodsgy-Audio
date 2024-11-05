@@ -19,6 +19,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation"; // Import useRouter and usePathname from next/navigation
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
@@ -27,6 +28,8 @@ export default function Navbar() {
   const [isMounted, setIsMounted] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+  const pathname = usePathname(); // Get current pathname
 
   useEffect(() => {
     setIsMounted(true);
@@ -134,6 +137,7 @@ export default function Navbar() {
     };
 
     createUserInFirestore(user);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createUserDoc]);
 
   const scrollToComponent = (id) => {
@@ -150,6 +154,14 @@ export default function Navbar() {
     }
   };
 
+  const handleNavigation = (id) => {
+    if (pathname !== "/") {
+      // Navigate to the homepage
+      router.push("/");
+    }
+    // Use setTimeout to allow time for navigation before scrolling
+    setTimeout(() => scrollToComponent(id), 0);
+  };
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -175,19 +187,19 @@ export default function Navbar() {
 
       <div className="flex justify-center gap-[2rem] md:gap-[3rem] lg:gap-[5rem] font-normal text-[20px] mx-auto md:translate-x-7">
         <button
-          onClick={() => scrollToComponent("about")}
+          onClick={() => handleNavigation("about")}
           className="md:my-0 my-5 hover:text-gray transition duration-200"
         >
           About
         </button>
         <button
-          onClick={() => scrollToComponent("pricing")}
+          onClick={() => handleNavigation("pricing")}
           className="md:my-0 my-5 hover:text-gray transition duration-200"
         >
           Pricing
         </button>
         <button
-          onClick={() => scrollToComponent("faq")}
+          onClick={() => handleNavigation("faq")}
           className="md:my-0 my-5 hover:text-gray transition duration-200"
         >
           FAQ

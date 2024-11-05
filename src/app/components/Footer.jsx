@@ -3,27 +3,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation"; // Import useRouter and usePathname from next/navigation
 
-const scrollToComponent = (id) => {
-  const element = document.getElementById(id);
-  if (element) {
-    const elementPosition =
-      element.getBoundingClientRect().top + window.scrollY;
-    const offsetPosition = elementPosition - 100;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
-  }
-};
-
-const handleContactClick = () => {
-  window.location.href = "mailto:creatorofnodsgy@gmail.com";
-};
-
 export default function Footer() {
   const router = useRouter();
   const pathname = usePathname(); // Get current pathname
+
+  const scrollToComponent = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - 100;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const handleContactClick = () => {
+    window.location.href = "mailto:creatorofnodsgy@gmail.com";
+  };
 
   const handleNavigation = (id) => {
     if (pathname !== "/") {
@@ -43,8 +43,7 @@ export default function Footer() {
             width={140}
             height={40}
             className="mx-auto md:mx-0"
-          alt="logo"
-
+            alt="logo"
           />
         </Link>
 

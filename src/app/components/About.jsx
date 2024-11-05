@@ -65,8 +65,8 @@ export default function About() {
               notes tailored to your notes
             </p>
             <p className="font-normal text-[20px] mt-5">
-              Whether you're revising for an exam or simply need to refresh on
-              tough topics, Nodsgy turns your study materials into customized
+              Whether you&apos;re revising for an exam or simply need to refresh
+              on tough topics, Nodsgy turns your study materials into customized
               audio notes, making learning more convenient and enjoyable.
             </p>
           </div>

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { loadStripe } from "@stripe/stripe-js"; // Import loadStripe
-import { getCheckoutUrl } from "../stripe/stripe"; // Import getCheckoutUrl
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import app from "../firebase/config";
@@ -70,7 +69,7 @@ export default function Pricing() {
           </span>
           <button
             className="bg-yellow py-1 px-4 rounded-3xl cursor-pointer"
-            onClick={() => handleCheckout("price_1QC208E4Jvxd3ZOStJgV0dBY", 50)}
+            // onClick={() => handleCheckout(process.env.NEXT_PUBLIC_FIRST_PRICE_ID, 50)}
           >
             Buy
           </button>
@@ -83,9 +82,9 @@ export default function Pricing() {
           </span>
           <button
             className=" bg-yellow py-1 px-4 rounded-3xl cursor-pointer"
-            onClick={() =>
-              handleCheckout("price_1QC208E4Jvxd3ZOStJgV0dBY", 100)
-            }
+            // onClick={() =>
+            //   handleCheckout(process.env.NEXT_PUBLIC_SECOND_PRICE_ID, 100)
+            // }
           >
             Buy
           </button>
@@ -98,9 +97,9 @@ export default function Pricing() {
           </span>
           <button
             className=" bg-yellow py-1 px-4 rounded-3xl cursor-pointer"
-            onClick={() =>
-              handleCheckout("price_1QC208E4Jvxd3ZOStJgV0dBY", 250)
-            }
+            // onClick={() =>
+            //   handleCheckout(process.env.NEXT_PUBLIC_THIRD_PRICE_ID, 250)
+            // }
           >
             Buy
           </button>
@@ -113,9 +112,9 @@ export default function Pricing() {
           </span>
           <button
             className=" bg-yellow py-1 px-4 rounded-3xl cursor-pointer"
-            onClick={() =>
-              handleCheckout("price_1QC208E4Jvxd3ZOStJgV0dBY", 400)
-            }
+            // onClick={() =>
+            //   handleCheckout(process.env.NEXT_PUBLIC_FOURTH_PRICE_ID, 400)
+            // }
           >
             Buy
           </button>

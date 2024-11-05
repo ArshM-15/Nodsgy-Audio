@@ -4,11 +4,8 @@ export default function TermsConditions() {
   return (
     <div className="w-[80%] ml-[5rem]">
       <h1 className="font-semibold sm:text-[25px] text-[22px]">
-        <strong>Terms and Conditions</strong>
+        Terms and Conditions
       </h1>
-
-      <p>Welcome to Nodsgy!</p>
-
       <p>
         These terms and conditions outline the rules and regulations for the use
         of Nodsgy's Website, located at https://www.nodsgy.com/.

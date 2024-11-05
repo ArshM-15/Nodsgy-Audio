@@ -62,8 +62,9 @@ export default function LandingPage() {
       setIsClient(true);
     });
     return () => unsubscribe();
-  }, []);
+  });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!isClient) return;
     console.log("1", audioFiles.length);
@@ -71,6 +72,7 @@ export default function LandingPage() {
     if (storedAudioFiles) {
       setAudioFiles(JSON.parse(storedAudioFiles));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClient]);
 
   useEffect(() => {
@@ -81,6 +83,7 @@ export default function LandingPage() {
       console.log("3", audioFiles.length);
       localStorage.setItem("audioFiles", JSON.stringify(audioFiles));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioFiles, isClient]);
 
   const handleFileChange = (event) => {
@@ -214,6 +217,7 @@ export default function LandingPage() {
         setIsCreatingAudio(false);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFile]);
 
   useEffect(() => {
@@ -238,6 +242,7 @@ export default function LandingPage() {
 
       return () => unsubscribe();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayAudioFiles]);
 
   useEffect(() => {
@@ -298,6 +303,7 @@ export default function LandingPage() {
       deductTokens();
       setDisplayAudioFiles(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioFiles]);
 
   useEffect(() => {
@@ -384,8 +390,11 @@ export default function LandingPage() {
               <div>
                 <ul>
                   {audioFilesTitles.map((title, index) => (
-                    <div className="mt-10 font-semibold text-[20px] w-[95%] md:w-[55%] px-4 py-3 mx-auto rounded-xl shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)]">
-                      <li key={index}>
+                    <div
+                      key={index}
+                      className="mt-10 font-semibold text-[20px] w-[95%] md:w-[55%] px-4 py-3 mx-auto rounded-xl shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)]"
+                    >
+                      <li>
                         {title}
                         <span className="inline-block ml-2">
                           <Image
