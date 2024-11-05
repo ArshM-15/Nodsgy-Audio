@@ -1,3 +1,4 @@
 env:
   - variable: NEXT_PUBLIC_OPENAI_API_KEY
-    secret: NEXT_PUBLIC_OPENAI_API_KEY
+    secret: sk-proj-3T4LYeikBE15wDWEn19vT3BlbkFJvEpUI7HzZ572POqdqgc8
+ 
