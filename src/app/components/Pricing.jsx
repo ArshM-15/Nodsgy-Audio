@@ -1,10 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { loadStripe } from "@stripe/stripe-js"; // Import loadStripe
 import { getAuth } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import app from "../firebase/config";
 
 export default function Pricing() {
   const handleCheckout = async (priceId, numOfTokens) => {

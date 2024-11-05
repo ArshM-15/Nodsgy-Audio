@@ -1,8 +1,6 @@
 import { useRef, useState, useEffect } from "react";
-import { FaPlay, FaPause } from "react-icons/fa";
 import { Seekbar } from "react-seekbar";
 import { LuShare } from "react-icons/lu";
-import { IoIosArrowDown } from "react-icons/io";
 import { GrPlayFill, GrPauseFill } from "react-icons/gr";
 
 const AudioComponent = ({ src, name, keyPoints }) => {
