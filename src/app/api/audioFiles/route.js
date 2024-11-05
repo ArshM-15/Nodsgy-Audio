@@ -4,7 +4,7 @@ import { db, fileStorage } from "../../firebase/config";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 let numOfChunks;
 export async function POST(req) {
