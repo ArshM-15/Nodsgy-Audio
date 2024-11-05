@@ -9,8 +9,10 @@ const openai = new OpenAI({
 let numOfChunks;
 export async function POST(req) {
   try {
-    // Use the /tmp directory for serverless environments
-    const tempDir = path.join("/tmp", "officeParserTemp");
+    // Set the writable directory path under /tmp for serverless environments
+    const tempDir = path.join("/tmp", "officeParserTemp", "tempfiles");
+
+    // Create the temp directory if it doesn’t exist
     if (!fs.existsSync(tempDir)) {
       fs.mkdirSync(tempDir, { recursive: true });
     }
