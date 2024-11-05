@@ -22,7 +22,5 @@ runConfig:
   # - variable: MY_SECRET
   #   secret: mySecretRef
 env:
-  - variable: OPENAI_API_KEY
-    secret: openai-api-key
   - variable: NEXT_PUBLIC_OPENAI_API_KEY
     secret: next_public_openai_api_key
