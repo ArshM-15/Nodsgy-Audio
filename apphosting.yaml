@@ -76,3 +76,5 @@ env:
     secret: WEBHOOK_SECRET
   - variable: STRIPE_SECRET_KEY
     secret: STRIPE_SECRET_KEY
+  - variable: OPENAI_API_KEY
+    secret: OPENAI_API_KEY

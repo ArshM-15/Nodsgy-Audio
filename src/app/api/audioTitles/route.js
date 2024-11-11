@@ -5,7 +5,7 @@ import path from "path";
 import { chdir } from "process";
 
 const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 let numOfChunks;
@@ -38,7 +38,6 @@ export async function POST(req) {
     // Parse the file within the /tmp directory
     const extractedData = await parseOfficeAsync(buffer);
     const text = extractedData.toString();
-    console.log(text);
 
     // Revert to the original working directory after parsing
     chdir(originalCwd);
@@ -47,16 +46,13 @@ export async function POST(req) {
     if (numOfChunks < 3 || numOfChunks > 5) {
       numOfChunks = 5;
     }
-    console.log("Number of chunks", numOfChunks);
 
     const textChunks = splitTextIntoChunks(text, numOfChunks);
-    console.log("text chunks", textChunks);
 
     const subtopicsPromises = textChunks.map((chunk) =>
       generateSubtopic(chunk)
     );
     const subtopics = await Promise.all(subtopicsPromises);
-    console.log("text subtopics", subtopics);
 
     return new Response(
       JSON.stringify({
@@ -97,7 +93,6 @@ async function checkNumOfChunks(text) {
   });
 
   const returnedNumOfChunks = completion.choices[0].message.content.trim();
-  console.log("Number of chunks", returnedNumOfChunks);
   numOfChunks = returnedNumOfChunks;
 }
 

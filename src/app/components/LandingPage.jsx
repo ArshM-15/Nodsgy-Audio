@@ -67,7 +67,6 @@ export default function LandingPage() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!isClient) return;
-    console.log("1", audioFiles.length);
     const storedAudioFiles = localStorage.getItem("audioFiles");
     if (storedAudioFiles) {
       setAudioFiles(JSON.parse(storedAudioFiles));
@@ -78,17 +77,13 @@ export default function LandingPage() {
   useEffect(() => {
     if (!isClient) return;
 
-    console.log("2", audioFiles.length);
     if (audioFiles.length == numOfChunks) {
-      console.log("3", audioFiles.length);
       localStorage.setItem("audioFiles", JSON.stringify(audioFiles));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioFiles, isClient]);
 
   const handleFileChange = (event) => {
-    console.log("Checking tokens:", numOfTokens);
-
     if (numOfTokens - 10 < 0) {
       alert(
         "You do not have enough tokens. You can purchase tokens from the pricing section. If you have not already, claim 30 FREE tokens when you create an account."
@@ -112,13 +107,11 @@ export default function LandingPage() {
     setSelectedFile(file);
     setCustomId(uuidv4());
     setAudioFiles([]);
-    console.log("File selected:", file.name);
   };
   useEffect(() => {
     if (selectedFile) {
       handleFileUpload(selectedFile);
     }
-    console.log("number of tokens", numOfTokens);
 
     async function handleFileUpload(selectedFile) {
       if (!selectedFile) return;
@@ -129,7 +122,6 @@ export default function LandingPage() {
         return; // Exit the function if local storage is not available
       }
 
-      console.log(customId);
       window.scrollBy({
         top: 500,
         behavior: "smooth",
@@ -153,7 +145,7 @@ export default function LandingPage() {
         setNumOfChunks(titlesData.numOfChunks);
         createAudioFiles(titlesData.titles, titlesData.chunks);
       } catch (error) {
-        console.log(error);
+        alert("There is an error. Refresh to retry.");
       }
     }
 
@@ -166,8 +158,6 @@ export default function LandingPage() {
       setIsCreatingAudio(true);
 
       try {
-        console.log("customId before creating fetch request:", customId);
-
         const response = await fetch("/api/audioFiles", {
           method: "POST",
           headers: {
@@ -200,7 +190,6 @@ export default function LandingPage() {
               try {
                 const data = JSON.parse(jsonData);
                 if (data.success) {
-                  console.log(`Audio created for subtopic: ${data.message}`);
                   setDisplayAudioFiles(true);
                 } else if (data.error) {
                   console.error("Error during audio creation:", data.error);
@@ -222,9 +211,6 @@ export default function LandingPage() {
 
   useEffect(() => {
     if (displayAudioFiles) {
-      console.log(customId);
-      console.log("trying to steal firestore reads from landingpage");
-
       const audioFilesRef = collection(db, "audioFiles");
       const unsubscribe = onSnapshot(
         query(audioFilesRef, orderBy("createdAt", "asc")),
@@ -266,8 +252,6 @@ export default function LandingPage() {
 
   const deductTokens = async () => {
     if (user) {
-      console.log("number of tokens b", numOfTokens);
-
       const userDocRef = doc(db, "users", auth.currentUser.uid);
       try {
         if (numOfTokens >= 10) {
@@ -275,7 +259,6 @@ export default function LandingPage() {
             tokens: numOfTokens - 10,
           });
           setNumOfTokens(numOfTokens - 10);
-          console.log("Tokens deducted by 10");
         }
       } catch (error) {
         console.error("Error updating tokens:", error);
@@ -286,7 +269,6 @@ export default function LandingPage() {
       if (localTokens >= 10) {
         localStorage.setItem("tokens", localTokens - 10);
         setNumOfTokens(localTokens - 10);
-        console.log("Tokens deducted by 10 from local storage");
       } else {
         alert("You do not have enough tokens");
       }
@@ -298,7 +280,6 @@ export default function LandingPage() {
     if (audioFiles.length > 0 && audioFiles == numOfChunks) {
       localStorage.setItem("audioFiles", JSON.stringify(audioFiles));
     }
-    console.log("the length of the audio files222", audioFiles.length);
     if (audioFiles.length == numOfChunks && displayAudioFiles === true) {
       deductTokens();
       setDisplayAudioFiles(false);

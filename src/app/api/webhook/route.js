@@ -18,7 +18,8 @@ const serviceAccount = {
   client_id: process.env.GOOGLE_FIREBASE_CLIENT_ID,
   auth_uri: process.env.GOOGLE_FIREBASE_AUTH_URI,
   token_uri: process.env.GOOGLE_FIREBASE_TOKEN_URI,
-  auth_provider_x509_cert_url: process.env.GOOGLE_FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
+  auth_provider_x509_cert_url:
+    process.env.GOOGLE_FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
   client_x509_cert_url: process.env.GOOGLE_FIREBASE_CLIENT_X509_CERT_URL,
   universe_domain: process.env.GOOGLE_FIREBASE_UNIVERSE_DOMAIN,
 };
@@ -59,9 +60,7 @@ export async function POST(req) {
       if (!lineItems) {
         return new Response("Internal Server Error", { status: 500 });
       }
-      console.log("Event Object:", JSON.stringify(event, null, 2));
       const amountSpent = event.data.object.amount_total / 100; // Convert from cents to dollars
-      console.log("User spent:", `$${amountSpent}`);
 
       // Retrieve the user’s UID from the checkout session metadata
       const userUid = event.data.object.metadata?.user_uid;
@@ -77,7 +76,6 @@ export async function POST(req) {
         return new Response("User UID not found in metadata", { status: 400 });
       }
 
-      console.log(userUid);
       // Retrieve user document in Firestore and add tokens
       const userDocRef = db.collection("users").doc(userUid);
 
@@ -96,8 +94,6 @@ export async function POST(req) {
         amountSpent: currentAmountSpent + amountSpent,
         amountOfTimesPayed: currentTimesPayed + 1,
       });
-
-      console.log("Tokens added to user account successfully");
     } catch (error) {
       console.error("Error processing checkout session:", error);
       return new Response("Internal Server Error", { status: 500 });

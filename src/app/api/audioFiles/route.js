@@ -4,7 +4,7 @@ import { db, fileStorage } from "../../firebase/config";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 let numOfChunks;
@@ -120,7 +120,6 @@ async function createKeyPoints(
     });
 
     const keyPoints = completion.choices[0].message.content;
-    console.log(keyPoints);
 
     await textToSpeech(writtenResponse, title, customId, keyPoints);
 

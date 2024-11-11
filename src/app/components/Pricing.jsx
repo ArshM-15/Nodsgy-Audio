@@ -66,7 +66,7 @@ export default function Pricing() {
           </span>
           <button
             className="bg-yellow py-1 px-4 rounded-3xl cursor-pointer"
-            onClick={() => handleCheckout(process.env.NEXT_PUBLIC_FIRST_PRICE_ID, 50)}
+            onClick={() => handleCheckout(50)}
           >
             Buy
           </button>
@@ -80,7 +80,7 @@ export default function Pricing() {
           <button
             className=" bg-yellow py-1 px-4 rounded-3xl cursor-pointer"
             onClick={() =>
-              handleCheckout(process.env.NEXT_PUBLIC_SECOND_PRICE_ID, 100)
+              handleCheckout(100)
             }
           >
             Buy
@@ -95,7 +95,7 @@ export default function Pricing() {
           <button
             className=" bg-yellow py-1 px-4 rounded-3xl cursor-pointer"
             onClick={() =>
-              handleCheckout(process.env.NEXT_PUBLIC_THIRD_PRICE_ID, 250)
+              handleCheckout(250)
             }
           >
             Buy
@@ -110,7 +110,7 @@ export default function Pricing() {
           <button
             className=" bg-yellow py-1 px-4 rounded-3xl cursor-pointer"
             onClick={() =>
-              handleCheckout(process.env.NEXT_PUBLIC_FOURTH_PRICE_ID, 400)
+              handleCheckout(400)
             }
           >
             Buy
