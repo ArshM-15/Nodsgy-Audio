@@ -78,5 +78,3 @@ env:
     secret: STRIPE_SECRET_KEY
   - variable: OPENAI_API_KEY
     secret: OPENAI_API_KEY
-  - variable: OPENAI_API_KEY
-    secret: OPENAI_API_KEY
