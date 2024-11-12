@@ -4,7 +4,7 @@ import Image from "next/image";
 import { getAuth } from "firebase/auth";
 
 export default function Pricing() {
-  const handleCheckout = async (priceId, numOfTokens) => {
+  const handleCheckout = async (numOfTokens) => {
     const auth = getAuth();
     const user = auth.currentUser; // Get the current user
 
@@ -23,7 +23,6 @@ export default function Pricing() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          priceId,
           numOfTokens,
           userUid: user.uid, // Pass the user's UID
         }),
