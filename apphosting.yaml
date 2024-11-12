@@ -40,14 +40,14 @@ env:
     secret: NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
   - variable: NEXT_PUBLIC_GOOGLE_ANALYTICS_CODE
     secret: NEXT_PUBLIC_GOOGLE_ANALYTICS_CODE
-  - variable: NEXT_PUBLIC_FIRST_PRICE_ID
-    secret: NEXT_PUBLIC_FIRST_PRICE_ID
-  - variable: NEXT_PUBLIC_SECOND_PRICE_ID
-    secret: NEXT_PUBLIC_SECOND_PRICE_ID
-  - variable: NEXT_PUBLIC_THIRD_PRICE_ID
-    secret: NEXT_PUBLIC_THIRD_PRICE_ID
-  - variable: NEXT_PUBLIC_FOURTH_PRICE_ID
-    secret: NEXT_PUBLIC_FOURTH_PRICE_ID
+  - variable: FIRST_PRICE_ID
+    secret: FIRST_PRICE_ID
+  - variable: SECOND_PRICE_ID
+    secret: SECOND_PRICE_ID
+  - variable: THIRD_PRICE_ID
+    secret: THIRD_PRICE_ID
+  - variable: FOURTH_PRICE_ID
+    secret: FOURTH_PRICE_ID
   - variable: GOOGLE_FIREBASE_TYPE
     secret: FIREBASE_TYPE
   - variable: GOOGLE_FIREBASE_PROJECT_ID
@@ -76,3 +76,7 @@ env:
     secret: WEBHOOK_SECRET
   - variable: STRIPE_SECRET_KEY
     secret: STRIPE_SECRET_KEY
+  - variable: OPENAI_API_KEY
+    secret: OPENAI_API_KEY
+  - variable: OPENAI_API_KEY
+    secret: OPENAI_API_KEY
