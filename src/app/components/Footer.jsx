@@ -2,6 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation"; // Import useRouter and usePathname from next/navigation
+import { FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   const router = useRouter();
@@ -36,16 +38,30 @@ export default function Footer() {
 
   return (
     <div className="bg-faintyellow">
-      <div className="md:flex flex-none justify-between items-center w-[90%] mx-auto pt-10 md:pt-0 pb-10">
-        <Link href="/" className="cursor-pointer">
-          <Image
-            src="/long-title.png"
-            width={140}
-            height={40}
-            className="mx-auto md:mx-0"
-            alt="logo"
-          />
-        </Link>
+      <div className="md:flex flex-none justify-between w-[80%] mx-auto pt-10 md:pt-0 pb-10">
+        <div className="mt-8">
+          <Link href="/" className="cursor-pointer">
+            <Image
+              src="/long-title.png"
+              width={140}
+              height={40}
+              className="mx-auto md:mx-0"
+              alt="logo"
+            />
+          </Link>
+          <div className="flex justify-between mt-5">
+            <Link href="">
+              <FaLinkedinIn className="text-2xl" />
+            </Link>
+            <Link href="/">
+              <FaXTwitter className="text-2xl" />
+            </Link>
+
+            <Link href="/">
+              <FaYoutube className="text-2xl" />
+            </Link>
+          </div>
+        </div>
 
         <div className="md:flex flex-none mt-10 md:mt-0">
           <div className="mr-[5rem] text-[20px]">
@@ -84,7 +100,8 @@ export default function Footer() {
               Privacy Policy
             </Link>
             <Link
-              href="/terms-and-conditions"
+              // href="/terms-and-conditions"
+              href="/"
               className="hover:text-gray transition duration-200 block"
             >
               Terms and Conditions
