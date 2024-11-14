@@ -50,14 +50,14 @@ export default function Footer() {
             />
           </Link>
           <div className="flex justify-between mt-5">
-            <Link href="">
+            <Link href="https://www.linkedin.com/in/arshvir-mundi/">
               <FaLinkedinIn className="text-2xl" />
             </Link>
-            <Link href="/">
+            <Link href="https://x.com/Nodsgy">
               <FaXTwitter className="text-2xl" />
             </Link>
 
-            <Link href="/">
+            <Link href="https://www.youtube.com/channel/UC1x2t5XUBA6h95BWnE3pz2w">
               <FaYoutube className="text-2xl" />
             </Link>
           </div>

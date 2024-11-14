@@ -119,13 +119,7 @@ export default function Pricing() {
         </div>
       </div>
       <h2 className="font-semibold sm:text-[25px] text-[20px] bg-faintyellow pt-5 pb-5 text-center mt-[3rem] group">
-        <span className="inline-block transition-transform transform group-hover:animate-confetti">
-          😊
-        </span>
-        <span className="mx-5">We do not offer any refunds at this time</span>
-        <span className="inline-block transition-transform transform group-hover:animate-confetti">
-          😊
-        </span>
+        <span className="mx-5 underline">We do not offer any refunds at this time</span>
       </h2>
     </div>
   );
