@@ -360,43 +360,45 @@ export default function LandingPage() {
               ))}
 
             {loadTitles ? (
-              <Image
-                src={"loading-spinner.svg"}
-                width={100}
-                height={10}
-                alt="loading spinner"
-                className="mx-auto pt-10"
-              />
+              <>
+                <Image
+                  src={"loading-spinner.svg"}
+                  width={100}
+                  height={10}
+                  alt="loading spinner"
+                  className="mx-auto pt-10"
+                />
+                <p className="mt-5 text-center">
+                  If an error occurs while generating, refresh the page and try
+                  again.
+                </p>
+              </>
             ) : (
               <div>
                 <ul>
                   {audioFilesTitles.map((title, index) => (
                     <>
-                      <div
-                        key={index}
-                        className="mt-10 font-semibold text-[20px] w-[95%] md:w-[55%] px-4 py-3 mx-auto rounded-xl shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)]"
-                      >
-                        <li>
-                          {title}
-                          <span className="inline-block ml-2">
-                            <Image
-                              src="subititle-loading.svg"
-                              width={30}
-                              height={10}
-                              alt="subtitle is loading"
-                              className="translate-y-[11px]"
-                            />
-                          </span>
-                        </li>
+                      <div>
+                        <div
+                          key={index}
+                          className="mt-10 font-semibold text-[20px] w-[95%] md:w-[55%] px-4 py-3 mx-auto rounded-xl shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)]"
+                        >
+                          <li>
+                            {title}
+                            <span className="inline-block ml-2">
+                              <Image
+                                src="subititle-loading.svg"
+                                width={30}
+                                height={10}
+                                alt="subtitle is loading"
+                                className="translate-y-[11px]"
+                              />
+                            </span>
+                          </li>
+                        </div>
                       </div>
                     </>
                   ))}
-                  <li>
-                    <p className="mt-5 text-center">
-                      If an error occurs while generating, refresh the page and
-                      try again.
-                    </p>
-                  </li>
                 </ul>
               </div>
             )}
