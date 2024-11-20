@@ -118,7 +118,7 @@ async function generateSubtopic(textChunk) {
       {
         role: "system",
         content:
-          "Generate a title from the following content. The title should summarize the key concept in this section of the content. Focus only on teachable concepts and nothing else. There shouldn't be any unnecessary special characters in the title.",
+          "Generate a title from the following content. The title should summarize the key concept in this section of the content. Focus only on teachable concepts and nothing else. There shouldn't be any unnecessary special characters in the title. Also don't overuse the word understanding. Only use it when it really matters.",
       },
       { role: "user", content: textChunk },
     ],
