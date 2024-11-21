@@ -102,7 +102,7 @@ const AudioComponent = ({ src, name, keyPoints }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-4 w-[95%] md:w-[55%] py-7 rounded-xl mx-auto mt-10 shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)]">
+    <div className="flex flex-col justify-center items-center space-y-4 w-[95%] md:w-[55%] py-7 rounded-xl mx-auto mt-[4rem] shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)]">
       <p className="font-semibold sm:text-[25px] text-[22px] text-center w-[90%]">
         {name}
       </p>

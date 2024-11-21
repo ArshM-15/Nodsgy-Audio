@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation"; // Import useRouter and usePathname from next/navigation
-import { FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { FaDiscord, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
@@ -50,8 +50,8 @@ export default function Footer() {
             />
           </Link>
           <div className="flex justify-between mt-5">
-            <Link href="https://www.linkedin.com/in/arshvir-mundi/">
-              <FaLinkedinIn className="text-2xl" />
+            <Link href="https://discord.gg/aPwyzwbW">
+              <FaDiscord className="text-2xl" />
             </Link>
             <Link href="https://x.com/Nodsgy">
               <FaXTwitter className="text-2xl" />

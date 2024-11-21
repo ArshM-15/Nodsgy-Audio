@@ -9,7 +9,7 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 export const metadata = {
   title: "Nodsgy",
   description:
-    "Nodsgy is developed so you can easily understand difficult concepts from your studies. It converts your notes into easy-to-understand audio explanations. Upload your materials and enjoy personalized audio notes.",
+    "Nodsgy is developed so you can easily understand difficult concepts from your studies. All you have to do is upload your PDF, PowerPoint, or Slides, and Nodsgy will convert them into the simplest explanations you've ever heard.",
 };
 
 export default function RootLayout({ children }) {
