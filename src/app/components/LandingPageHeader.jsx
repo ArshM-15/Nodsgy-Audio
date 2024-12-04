@@ -7,9 +7,9 @@ export default function LandingPageHeader() {
         for you
       </h1>
       <h2 className="text-gray font-semibold sm:text-[25px] text-[22px] mx-auto sm:w-[60%] w-[90%] mt-5 text-center">
-        Upload your PDF, PowerPoint, or Slides, and Nodsgy will convert them
+        Upload your PDF, PowerPoint, or slides, and Nodsgy will convert them
         into the simplest explanations you've ever heard
       </h2>
     </div>
-  );
+  );  
 }
