@@ -29,11 +29,18 @@ export default function RootLayout({ children }) {
            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_CODE}'); // Correct usage
           `}
         </Script>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1414881818179517"
-          crossorigin="anonymous"
-        ></script>
+        <Script id="google-adsense" strategy="afterInteractive">
+          {`
+    (function(d, s) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      js = d.createElement(s);
+      js.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1414881818179517";
+      js.crossOrigin = "anonymous";
+      js.async = true;
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, 'script');
+  `}
+        </Script>
       </head>
       <body className={montserrat.className}>
         <Navbar />
