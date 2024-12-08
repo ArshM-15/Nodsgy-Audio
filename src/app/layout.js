@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Script from "next/script";
+import Head from "next/head";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -16,6 +17,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <Head>
+          <title>Nodsgy</title> {/* Explicitly set the title */}
+          <meta
+            name="description"
+            content="Nodsgy is developed so you can easily understand difficult concepts from your studies. All you have to do is upload your PDF, PowerPoint, or Slides, and Nodsgy will convert them into the simplest explanations you've ever heard."
+          />
+        </Head>
         <Script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_CODE}`} // Correct usage with template literals
