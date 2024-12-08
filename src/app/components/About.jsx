@@ -103,7 +103,7 @@ export default function About() {
           </div>
         </div>
       </div>
-      {/* <Script
+      <Script
         id="adsense-script-horizontal-2"
         strategy="afterInteractive"
         async
@@ -124,9 +124,9 @@ export default function About() {
         {`
     (adsbygoogle = window.adsbygoogle || []).push({});
   `}
-      </Script> */}
+      </Script>
 
-      <div className="bg-faintyellow pt-5 mt-[5rem] pb-10 text-center">
+      <div className="bg-faintyellow pt-5 pb-10 text-center">
         <p className="font-bold md:text-[65px] text-[35px] w-[65%] mx-auto">
           Take your study experience to the next level with Nodsgy
         </p>
