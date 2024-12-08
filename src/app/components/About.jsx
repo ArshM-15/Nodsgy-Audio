@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Script from "next/script";
 
 export default function About() {
   // Function to handle scrolling
@@ -102,7 +103,30 @@ export default function About() {
           </div>
         </div>
       </div>
-      <div className="bg-faintyellow mt-[7rem] pt-5 pb-10 text-center">
+      {/* <Script
+        id="adsense-script-horizontal-2"
+        strategy="afterInteractive"
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1414881818179517"
+        crossorigin="anonymous"
+      />
+
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block" }}
+        data-ad-client="ca-pub-1414881818179517"
+        data-ad-slot="4399670817"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+
+      <Script id="google-ad">
+        {`
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  `}
+      </Script> */}
+
+      <div className="bg-faintyellow pt-5 mt-[5rem] pb-10 text-center">
         <p className="font-bold md:text-[65px] text-[35px] w-[65%] mx-auto">
           Take your study experience to the next level with Nodsgy
         </p>

@@ -16,6 +16,7 @@ import ExplainAudio from "./ExplainAudio";
 import AudioComponent from "./AudioComponent";
 import { onAuthStateChanged } from "firebase/auth";
 import LandingPageHeader from "./LandingPageHeader";
+import Script from "next/script";
 
 export default function LandingPage() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -344,10 +345,32 @@ export default function LandingPage() {
           </span>
         </h2>
       )}
+      {/* <Script
+        id="adsense-script-horizontal"
+        strategy="afterInteractive"
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1414881818179517"
+        crossorigin="anonymous"
+      />
+
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block" }}
+        data-ad-client="ca-pub-1414881818179517"
+        data-ad-slot="1965079168"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+
+      <Script id="google-ads">
+        {`
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  `}
+      </Script> */}
 
       {isClient ? (
         <>
-          <div className="mt-[8rem]">
+          <div className="mt-[5rem]">
             {audioFiles.length > 0 &&
               audioFiles.map((file, index) => (
                 <div key={index} className="audio-file mb-4">
@@ -358,7 +381,6 @@ export default function LandingPage() {
                   />
                 </div>
               ))}
-
             {loadTitles ? (
               <>
                 <Image
