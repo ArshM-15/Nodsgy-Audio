@@ -345,7 +345,7 @@ export default function LandingPage() {
           </span>
         </h2>
       )}
-      {/* <Script
+      <Script
         id="adsense-script-horizontal"
         strategy="afterInteractive"
         async
@@ -366,11 +366,11 @@ export default function LandingPage() {
         {`
     (adsbygoogle = window.adsbygoogle || []).push({});
   `}
-      </Script> */}
+      </Script>
 
       {isClient ? (
         <>
-          <div className="mt-[5rem]">
+          <div>
             {audioFiles.length > 0 &&
               audioFiles.map((file, index) => (
                 <div key={index} className="audio-file mb-4">
