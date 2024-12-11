@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
         </Head>
         <Script
           async
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_CODE}`} // Correct usage with template literals
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_CODE}`}
         />
         <Script id="google-analytics">
           {`
@@ -34,14 +34,14 @@ export default function RootLayout({ children }) {
            function gtag(){dataLayer.push(arguments);}
            gtag('js', new Date());
          
-           gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_CODE}'); // Correct usage
+           gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_CODE}');
           `}
         </Script>
         <Script
           id="adsense-script"
           strategy="afterInteractive"
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1414881818179517"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_AUTO_ADS}`}
           crossorigin="anonymous"
         />
       </head>
