@@ -186,7 +186,7 @@ export default function Navbar() {
           />
         </Link>
 
-        <div className="flex justify-center gap-[5rem] font-normal text-[20px] mx-auto md:translate-x-7 ml-10">
+        <div className="flex justify-center gap-[3rem] font-normal text-[20px] mx-auto md:translate-x-7 md:ml-5 ml-0">
           <button
             onClick={() => handleNavigation("about")}
             className="md:my-0 my-5 hover:text-gray transition duration-200"
@@ -210,7 +210,7 @@ export default function Navbar() {
 
       {!isLoading && (
         <div className="flex items-center justify-center md:justify-normal">
-          <h2 className="mr-5 font-normal text-[20px]">
+          <h2 className="mr-3 font-normal text-[20px]">
             <div className="flex items-center">
               <p className="font-semibold">{numOfCredits}</p>
               <Image
@@ -223,7 +223,7 @@ export default function Navbar() {
             </div>
           </h2>
           {user ? (
-            <div>
+            <div className="flex items-center">
               <button
                 className="font-medium text-[20px] bg-yellow py-2 px-4 rounded-3xl mr-5"
                 onClick={() => handleNavigation("pricing")}
@@ -239,12 +239,12 @@ export default function Navbar() {
               />
             </div>
           ) : (
-            <button
-              className="font-medium text-[20px] bg-yellow py-2 px-4 rounded-3xl"
-              onClick={handleSignIn}
-            >
-              Sign In
-            </button>
+              <button
+                className="font-medium text-[20px] bg-yellow py-2 px-4 rounded-3xl"
+                onClick={handleSignIn}
+              >
+                Sign In
+              </button>
           )}
         </div>
       )}

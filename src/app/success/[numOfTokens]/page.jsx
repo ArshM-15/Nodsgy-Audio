@@ -9,14 +9,14 @@ export default function Success() {
   const [userSpent, setUserSpent] = useState();
 
   useEffect(() => {
-    if (numOfCredits == 5) {
-      setUserSpent(2.99);
-    } else if (numOfCredits == 10) {
-      setUserSpent(5.49);
+    if (numOfCredits == 10) {
+      setUserSpent(0.99);
     } else if (numOfCredits == 25) {
-      setUserSpent(12.99);
+      setUserSpent(1.49);
+    } else if (numOfCredits == 50) {
+      setUserSpent(2.99);
     } else {
-      setUserSpent(19.99);
+      setUserSpent(4.99);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
