@@ -5,15 +5,15 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 
 export default function Success() {
-  const { numOfTokens } = useParams();
+  const { numOfCredits } = useParams();
   const [userSpent, setUserSpent] = useState();
 
   useEffect(() => {
-    if (numOfTokens == 50) {
+    if (numOfCredits == 5) {
       setUserSpent(2.99);
-    } else if (numOfTokens == 100) {
+    } else if (numOfCredits == 10) {
       setUserSpent(5.49);
-    } else if (numOfTokens == 250) {
+    } else if (numOfCredits == 25) {
       setUserSpent(12.99);
     } else {
       setUserSpent(19.99);
@@ -27,7 +27,7 @@ export default function Success() {
         Thank you for your purchase!
       </h1>
       <h1 className="font-bold text-[35px] text-center w-[85%] mx-auto mt-2">
-        <span className="text-yellow">{numOfTokens} Tokens </span>
+        <span className="text-yellow">{numOfCredits} Credits </span>
         have been added to your account
       </h1>
       <p className="font-normal text-[20px] text-center mt-5">

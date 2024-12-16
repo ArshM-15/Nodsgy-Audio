@@ -1,19 +1,34 @@
 import React, { useRef, useState, useEffect } from "react";
 import { GrPlayFill, GrPauseFill } from "react-icons/gr";
+import { doc, updateDoc, increment } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 const ExplainAudio = () => {
   const [play, setPlay] = useState(false);
   const oceanRef = useRef(null);
 
-  function toggleAudio() {
+  const updateAnalytics = async (field) => {
+    try {
+      const docRef = doc(db, "other-analytics", "numOfTimesClicked");
+      await updateDoc(docRef, {
+        [field]: increment(1),
+      });
+    } catch (error) {
+      console.error(`Error updating ${field} counter:`, error);
+    }
+  };
+
+  const toggleAudio = () => {
     if (play) {
       oceanRef.current?.pause();
       setPlay(false);
+      updateAnalytics("pauseButton");
     } else {
       oceanRef.current?.play();
       setPlay(true);
+      updateAnalytics("playButton");
     }
-  }
+  };
 
   useEffect(() => {
     const audio = oceanRef.current;

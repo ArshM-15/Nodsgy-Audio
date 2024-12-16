@@ -26,7 +26,7 @@ export default function LandingPage() {
   const [customId, setCustomId] = useState();
   const [isClient, setIsClient] = useState(false);
   const [loadTitles, setLoadTitles] = useState(false);
-  const [numOfTokens, setNumOfTokens] = useState(0);
+  const [numOfCredits, setNumOfCredits] = useState(0);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [numOfChunks, setNumOfChunks] = useState(null);
@@ -36,18 +36,18 @@ export default function LandingPage() {
     setIsClient(true);
   }, []);
 
-  const checkTokens = async () => {
+  const checkCredits = async () => {
     if (user) {
       const userDocRef = doc(db, "users", auth.currentUser.uid);
       const userDocSnapshot = await getDoc(userDocRef);
       if (userDocSnapshot.exists()) {
         const userData = userDocSnapshot.data();
-        const currentTokens = userData.tokens;
-        setNumOfTokens(currentTokens);
+        const currentCredits = userData.credits;
+        setNumOfCredits(currentCredits);
       }
     } else {
-      const localTokens = parseInt(localStorage.getItem("tokens"), 10) || 0;
-      setNumOfTokens(localTokens);
+      const localCredits = parseInt(localStorage.getItem("credits"), 10) || 0;
+      setNumOfCredits(localCredits);
     }
   };
 
@@ -55,10 +55,10 @@ export default function LandingPage() {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         setUser(authUser);
-        checkTokens();
+        checkCredits();
       } else {
         setUser(null);
-        checkTokens();
+        checkCredits();
       }
       setIsClient(true);
     });
@@ -85,9 +85,9 @@ export default function LandingPage() {
   }, [audioFiles, isClient]);
 
   const handleFileChange = (event) => {
-    if (numOfTokens - 10 < 0) {
+    if (numOfCredits - 1 < 0) {
       alert(
-        "You do not have enough tokens. You can purchase tokens from the pricing section. If you have not already, claim 30 FREE tokens when you create an account."
+        "You do not have enough credits. You can purchase credits from the pricing section."
       );
       return;
     }
@@ -251,29 +251,29 @@ export default function LandingPage() {
     };
   }, [isCreatingAudio]); // Runs whenever isCreatingAudio changes
 
-  const deductTokens = async () => {
+  const deductCredits = async () => {
     if (user) {
       const userDocRef = doc(db, "users", auth.currentUser.uid);
       try {
-        if (numOfTokens >= 10) {
+        if (numOfCredits >= 1) {
           await updateDoc(userDocRef, {
-            tokens: numOfTokens - 10,
+            credits: numOfCredits - 1,
           });
-          setNumOfTokens(numOfTokens - 10);
+          setNumOfCredits(numOfCredits - 1);
         }
       } catch (error) {
-        console.error("Error updating tokens:", error);
+        console.error("Error updating credits:", error);
       }
-      checkTokens();
+      checkCredits();
     } else {
-      const localTokens = parseInt(localStorage.getItem("tokens"), 10) || 0;
-      if (localTokens >= 10) {
-        localStorage.setItem("tokens", localTokens - 10);
-        setNumOfTokens(localTokens - 10);
+      const localCredits = parseInt(localStorage.getItem("credits"), 10) || 0;
+      if (localCredits >= 1) {
+        localStorage.setItem("credits", localCredits - 1);
+        setNumOfCredits(localCredits - 1);
       } else {
-        alert("You do not have enough tokens");
+        alert("You do not have enough credits");
       }
-      checkTokens();
+      checkCredits();
     }
   };
 
@@ -282,7 +282,7 @@ export default function LandingPage() {
       localStorage.setItem("audioFiles", JSON.stringify(audioFiles));
     }
     if (audioFiles.length == numOfChunks && displayAudioFiles === true) {
-      deductTokens();
+      deductCredits();
       setDisplayAudioFiles(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -332,19 +332,6 @@ export default function LandingPage() {
         />
         <ExplainAudio />
       </div>
-      {!user && !isLoading && (
-        <h2 className="font-semibold sm:text-[25px] text-[20px] bg-faintyellow pt-5 pb-5 text-center mt-[5rem] group">
-          <span className="inline-block transition-transform transform group-hover:animate-confetti">
-            🎉
-          </span>
-          <span className="mx-5">
-            Get 30 Tokens for FREE when you create an account
-          </span>
-          <span className="inline-block transition-transform transform group-hover:animate-confetti">
-            🎉
-          </span>
-        </h2>
-      )}
       {/* <Script
         id="adsense-script-horizontal"
         strategy="afterInteractive"

@@ -88,3 +88,11 @@ env:
     secret: OPENAI_API_KEY
   - variable: NEXT_PUBLIC_GOOGLE_AUTO_ADS
     secret: NEXT_PUBLIC_GOOGLE_AUTO_ADS
+  - variable: FIRST_CREDIT_PRICE_ID
+    secret: FIRST_CREDIT_PRICE_ID
+  - variable: SECOND_CREDIT_PRICE_ID
+    secret: SECOND_CREDIT_PRICE_ID
+  - variable: THIRD_CREDIT_PRICE_ID
+    secret: THIRD_CREDIT_PRICE_ID
+  - variable: FOURTH_CREDIT_PRICE_ID
+    secret: FOURTH_CREDIT_PRICE_ID

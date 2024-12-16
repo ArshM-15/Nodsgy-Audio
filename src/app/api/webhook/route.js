@@ -65,10 +65,10 @@ export async function POST(req) {
       // Retrieve the user’s UID from the checkout session metadata
       const userUid = event.data.object.metadata?.user_uid;
 
-      // Convert numOfTokens to an integer safely
-      const numOfTokensString = event.data.object.metadata?.num_of_tokens;
-      const numOfTokens = numOfTokensString
-        ? parseInt(numOfTokensString, 10)
+      // Convert numOfCredits to an integer safely
+      const numOfCreditsString = event.data.object.metadata?.num_of_credits;
+      const numOfCredits = numOfCreditsString
+        ? parseInt(numOfCreditsString, 10)
         : 0;
 
       if (!userUid) {
@@ -76,12 +76,12 @@ export async function POST(req) {
         return new Response("User UID not found in metadata", { status: 400 });
       }
 
-      // Retrieve user document in Firestore and add tokens
+      // Retrieve user document in Firestore and add credits
       const userDocRef = db.collection("users").doc(userUid);
 
       // Fetch the document data
       const userDoc = await userDocRef.get();
-      const currentTokens = userDoc.exists ? userDoc.data().tokens || 0 : 0;
+      const currentCredits = userDoc.exists ? userDoc.data().credits || 0 : 0;
       const currentAmountSpent = userDoc.exists
         ? userDoc.data().amountSpent || 0
         : 0;
@@ -90,7 +90,7 @@ export async function POST(req) {
         : 0;
 
       await userDocRef.update({
-        tokens: currentTokens + numOfTokens,
+        credits: currentCredits + numOfCredits,
         amountSpent: currentAmountSpent + amountSpent,
         amountOfTimesPayed: currentTimesPayed + 1,
       });

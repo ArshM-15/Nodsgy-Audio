@@ -14,7 +14,7 @@ export default function About() {
     }
   };
   return (
-    <div className="mt-[5rem]" id="about">
+    <div className="mt-[11rem]" id="about">
       <div>
         <Image
           src="/about-title.png"
@@ -37,7 +37,7 @@ export default function About() {
               Just upload your file, and you’re all set! Nodsgy will break your
               content down into 3-5 sub-sections, generating natural, human-like
               audio explanations for each part. Each sub-section is then
-              summarized and short, easy-to-follow bullet points.
+              summarized into short, easy-to-follow bullet points.
             </p>
           </div>
           <div className="aboutScreenWidth:translate-x-[-10rem]">
@@ -83,13 +83,12 @@ export default function About() {
         <div className="my-5 md:flex w-[100%] justify-between items-center md:mt-[7rem]">
           <div className="md:w-[45%] text-center md:text-left">
             <p className="font-semibold sm:text-[25px] text-[22px]">
-              Nodsgy’s token system lets you turn notes into audio effortlessly
+              Nodsgy’s credit system lets you turn notes into audio effortlessly
             </p>
             <p className="font-normal text-[20px] mt-5">
-              Each audio explanation is priced at 10 tokens, and you can buy
-              additional tokens from the pricing section. If you have not
-              already, claim your FREE 30 tokens when you create an account. Get
-              started today and transform your notes into audio explanations.
+              Each audio explanation is priced at 1 credit, and you can buy
+              additional credits from the pricing section. Simply sign up,
+              purchase credits, and simplify tough topics in seconds.
             </p>
           </div>
           <div className="aboutScreenWidth:translate-x-[-10rem]">
@@ -132,7 +131,7 @@ export default function About() {
         </p>
         <button
           onClick={scrollToNavbar}
-          className="font-medium text-[22px] bg-yellow py-2 px-4 rounded-3xl cursor-pointer mt-8"
+          className="font-semibold text-[22px] bg-yellow py-2 px-4 rounded-3xl cursor-pointer mt-8"
         >
           Try Nodsgy
         </button>

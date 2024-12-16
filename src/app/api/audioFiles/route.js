@@ -75,7 +75,7 @@ async function createAudioForSubtopic(
             index === numOfChunks - 1
               ? "If there is anyhting else important in the text, like something that is upcoming, remind that."
               : ""
-          } The explanation must be between 200-400 words.`,
+          } The explanation must be between 160 words max. Don't go over 160 words.`,
         },
         { role: "user", content: chunk },
       ],
@@ -161,4 +161,3 @@ async function textToSpeech(writtenResponse, title, customId, keyPoints) {
     console.error("Error converting text to speech or uploading audio:", error);
   }
 }
-//asdads

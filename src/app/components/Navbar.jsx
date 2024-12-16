@@ -24,12 +24,12 @@ import { useRouter, usePathname } from "next/navigation"; // Import useRouter an
 export default function Navbar() {
   const [user, setUser] = useState(null);
   const [createUserDoc, setCreateUserDoc] = useState(false);
-  const [numOfTokens, setNumOfTokens] = useState(30);
+  const [numOfCredits, setNumOfCredits] = useState(2);
   const [isMounted, setIsMounted] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
+  // const [isModalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const pathname = usePathname(); // Get current pathname
+  const pathname = usePathname();
 
   useEffect(() => {
     setIsMounted(true);
@@ -44,21 +44,21 @@ export default function Navbar() {
   useEffect(() => {
     if (isMounted) {
       try {
-        let storedTokens = localStorage.getItem("tokens");
+        let storedCredits = localStorage.getItem("credits");
 
-        if (storedTokens === null) {
-          localStorage.setItem("tokens", 30);
-          setNumOfTokens(30);
+        if (storedCredits === null) {
+          localStorage.setItem("credits", 2);
+          setNumOfCredits(2);
         } else {
-          setNumOfTokens(parseInt(storedTokens, 10));
+          setNumOfCredits(parseInt(storedCredits, 10));
         }
       } catch (error) {
-        console.error("Error reading tokens from local storage:", error);
+        console.error("Error reading credits from local storage:", error);
       }
     }
   }, [isMounted]);
 
-  const checkTokens = async () => {
+  const checkCredits = async () => {
     if (!auth.currentUser) return;
 
     try {
@@ -67,19 +67,19 @@ export default function Navbar() {
 
       if (userDocSnapshot.exists()) {
         const userData = userDocSnapshot.data();
-        const currentTokens = userData.tokens;
-        setNumOfTokens(currentTokens);
+        const currentCredits = userData.credits;
+        setNumOfCredits(currentCredits);
 
-        localStorage.setItem("tokens", currentTokens);
+        localStorage.setItem("credits", currentCredits);
       }
     } catch (error) {
-      console.error("Error fetching tokens from Firestore:", error);
+      console.error("Error fetching credits from Firestore:", error);
     }
   };
 
   useEffect(() => {
     if (user) {
-      checkTokens();
+      checkCredits();
     }
   }, [user]);
 
@@ -108,8 +108,8 @@ export default function Navbar() {
         const querySnapshot = await getDocs(emailQuery);
 
         if (querySnapshot.empty) {
-          const storedTokens = localStorage.getItem("tokens");
-          const tokens = storedTokens ? parseInt(storedTokens, 10) : 30;
+          const storedCredits = localStorage.getItem("credits");
+          const credits = storedCredits ? parseInt(storedCredits, 10) : 2;
 
           const userDocRef = doc(db, "users", auth.currentUser.uid);
           await setDoc(userDocRef, {
@@ -117,18 +117,18 @@ export default function Navbar() {
             email: currentUser.email,
             photoURL: currentUser.photoURL,
             createdAt: serverTimestamp(),
-            tokens: tokens + 30,
+            credits: credits,
             amountSpent: 0,
             amountOfTimesPayed: 0,
           });
 
-          localStorage.setItem("tokens", tokens + 30);
-          setNumOfTokens(tokens + 30);
+          // localStorage.setItem("credits", credits + 3);
+          // setNumOfCredits(credits + 3);
         } else {
           querySnapshot.forEach((doc) => {
             const userData = doc.data();
-            setNumOfTokens(userData.tokens);
-            localStorage.setItem("tokens", userData.tokens);
+            setNumOfCredits(userData.credits);
+            localStorage.setItem("credits", userData.credits);
           });
         }
       } catch (error) {
@@ -175,50 +175,69 @@ export default function Navbar() {
       className="md:flex text-center mx-auto items-center justify-between w-[90%] my-7"
       id="navbar"
     >
-      <Link href="/">
-        <Image
-          src="/long-title.png"
-          width={150}
-          height={50}
-          alt="logo"
-          className="md:mx-0 mx-auto cursor-pointer"
-        />
-      </Link>
+      <div className="md:flex block">
+        <Link href="/">
+          <Image
+            src="/long-title.png"
+            width={150}
+            height={50}
+            alt="logo"
+            className="md:mx-0 mx-auto cursor-pointer"
+          />
+        </Link>
 
-      <div className="flex justify-center gap-[2rem] md:gap-[3rem] lg:gap-[5rem] font-normal text-[20px] mx-auto md:translate-x-7">
-        <button
-          onClick={() => handleNavigation("about")}
-          className="md:my-0 my-5 hover:text-gray transition duration-200"
-        >
-          About
-        </button>
-        <button
-          onClick={() => handleNavigation("pricing")}
-          className="md:my-0 my-5 hover:text-gray transition duration-200"
-        >
-          Pricing
-        </button>
-        <button
-          onClick={() => handleNavigation("faq")}
-          className="md:my-0 my-5 hover:text-gray transition duration-200"
-        >
-          FAQ
-        </button>
+        <div className="flex justify-center gap-[5rem] font-normal text-[20px] mx-auto md:translate-x-7 ml-10">
+          <button
+            onClick={() => handleNavigation("about")}
+            className="md:my-0 my-5 hover:text-gray transition duration-200"
+          >
+            About
+          </button>
+          <button
+            onClick={() => handleNavigation("pricing")}
+            className="md:my-0 my-5 hover:text-gray transition duration-200"
+          >
+            Pricing
+          </button>
+          <button
+            onClick={() => handleNavigation("faq")}
+            className="md:my-0 my-5 hover:text-gray transition duration-200"
+          >
+            FAQ
+          </button>
+        </div>
       </div>
 
       {!isLoading && (
         <div className="flex items-center justify-center md:justify-normal">
           <h2 className="mr-5 font-normal text-[20px]">
-            {numOfTokens} Tokens Left
+            <div className="flex items-center">
+              <p className="font-semibold">{numOfCredits}</p>
+              <Image
+                src="/credit-image.png"
+                width={40}
+                height={40}
+                alt="credit"
+                className="ml-1"
+              />
+            </div>
           </h2>
           {user ? (
-            <Image
-              src={user.photoURL}
-              width={50}
-              height={50}
-              alt="User Profile"
-              className="rounded-full"
-            />
+            <div>
+              <button
+                className="font-medium text-[20px] bg-yellow py-2 px-4 rounded-3xl mr-5"
+                onClick={() => handleNavigation("pricing")}
+              >
+                Buy Credits
+              </button>
+              <Image
+                src={user.photoURL}
+                width={50}
+                height={50}
+                alt="User Profile"
+                className="rounded-full"
+              />
+            </div>
           ) : (
             <button
               className="font-medium text-[20px] bg-yellow py-2 px-4 rounded-3xl"

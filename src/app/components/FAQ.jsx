@@ -17,9 +17,9 @@ export default function FAQ() {
       answer: "It supports PDF, pptx, xlsx, odt, odp, and ods file types.",
     },
     {
-      question: "How many tokens does it take to use Nodsgy each time?",
+      question: "How many credits does it take to use Nodsgy each time?",
       answer:
-        "It takes 10 tokens for every use. Tokens can be purchased under the pricing section.",
+        "It takes 1 credit for every use. Credits can be purchased under the pricing section.",
     },
     {
       question: "How long are the explanations?",
