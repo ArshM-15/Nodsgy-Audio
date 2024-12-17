@@ -24,7 +24,7 @@ export default function FAQ() {
     {
       question: "How long are the explanations?",
       answer:
-        "Each explanation is roughly 1-2 minutes. The length of each explanation depends upon the content.",
+        "Each explanation is roughly 1-2 minutes long. The length of each explanation depends upon the content.",
     },
     {
       question: "Do you offer a refund?",
