@@ -28,8 +28,11 @@ export default function FAQ() {
     },
     {
       question: "Do you issue a refund?",
-      answer:
-        "We do not issue refunds at this time.",
+      answer: "We do not issue refunds at this time.",
+    },
+    {
+      question: "Is it accurate 100% of the time?",
+      answer: "No, the AI can make mistakes, please verify the output.",
     },
   ];
 

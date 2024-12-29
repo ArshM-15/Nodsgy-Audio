@@ -354,8 +354,8 @@ export default function LandingPage() {
         <h3 className="text-center font-semibold text-[35px] mt-[5rem]">
           {/* Join <span className="text-yellow">{numOfUsers}</span> users creating{" "} */}
           {/* <span className="text-yellow">{numOfAudioFiles}</span> audio files so */}
-          Join <span className="text-yellow">1292</span> users creating{" "}
-          <span className="text-yellow">5213</span> audio files so far!
+          Join <span className="text-yellow">1314</span> users creating{" "}
+          <span className="text-yellow">5322</span> audio files so far!
         </h3>
       </div>
       {/* <Script
