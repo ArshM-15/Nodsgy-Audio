@@ -54,7 +54,7 @@ export default function Pricing() {
           an account.
         </h2>
       </div>
-      <div className="mt-10 rounded-2xl py-3 px-5 sm:px-8 mx-auto w-[24rem] sm:w-[40rem] font-semibold text-[22px] shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)]">
+      {/* <div className="mt-10 rounded-2xl py-3 px-5 sm:px-8 mx-auto w-[24rem] sm:w-[40rem] font-semibold text-[22px] shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)]">
         <div className="flex justify-between py-3 border-b-[#e0e0e0] border-b border-solid items-center">
           <div className="flex items-center w-[4rem]">
             <span>10</span>
@@ -173,9 +173,74 @@ export default function Pricing() {
             Buy
           </button>
         </div>
+      </div> */}
+
+      <div className="block md:flex justify-between w-[80%] mx-auto">
+        <div className="font-semibold text-[22px] shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)] px-5 py-7 rounded-2xl flex flex-col items-center md:w-[30%] w-[20rem] mt-10 mx-auto">
+          <div className="h-[200px] w-full flex items-center justify-center overflow-hidden">
+            <Image
+              src="/pricing-img-1.png"
+              alt="pricing image"
+              className="h-full object-contain"
+              width={200}
+              height={100}
+            />
+          </div>
+          <p className="text-center mt-[1rem]">50 Credits</p>
+          <p className="text-center mb-[1rem] font-normal text-[20px]">
+            $0.10 per audio
+          </p>
+          <button className="bg-yellow py-1.5 px-4 rounded-3xl cursor-pointer"
+            onClick={() => handleCheckout(50)}
+            >
+            Buy for $5
+          </button>
+        </div>
+
+        <div className="font-semibold text-[22px] shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)] px-5 py-7 rounded-2xl flex flex-col items-center md:w-[30%] w-[20rem] mt-10 mx-auto">
+          <div className="h-[200px] w-full flex items-center justify-center overflow-hidden">
+            <Image
+              src="/pricing-img-2.png"
+              alt="pricing image"
+              className="h-full object-contain"
+              width={100}
+              height={100}
+            />
+          </div>
+          <p className="text-center mt-[1rem]">100 Credits</p>
+          <p className="text-center mb-[1rem] font-normal text-[20px]">
+            $0.09 per audio
+          </p>
+          <button className="bg-yellow py-1.5 px-4 rounded-3xl cursor-pointer"
+            onClick={() => handleCheckout(100)}
+            >
+            Buy for $9
+          </button>
+        </div>
+
+        <div className="font-semibold text-[22px] shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)] px-5 py-7 rounded-2xl flex flex-col items-center md:w-[30%] w-[20rem] mt-10 mx-auto">
+          <div className="h-[200px] w-full flex items-center justify-center overflow-hidden">
+            <Image
+              src="/pricing-img-3.png"
+              alt="pricing image"
+              className="h-full object-contain"
+              width={200}
+              height={100}
+            />
+          </div>
+          <p className="text-center mt-[1rem]">250 Credits</p>
+          <p className="text-center mb-[1rem] font-normal text-[20px]">
+            $0.08 per audio
+          </p>
+          <button className="bg-yellow py-1.5 px-4 rounded-3xl cursor-pointer"
+            onClick={() => handleCheckout(250)}
+            >
+            Buy for $20
+          </button>
+        </div>
       </div>
       <h2 className="font-semibold sm:text-[25px] text-[20px] bg-faintyellow pt-5 pb-5 text-center mt-[3rem] group">
-        <span className="mx-5">We do not offer any refunds at this time</span>
+        <span className="mx-5">We do not issue refunds at this time</span>
       </h2>
     </div>
   );

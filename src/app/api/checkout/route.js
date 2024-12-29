@@ -11,15 +11,16 @@ export async function POST(req) {
     const domain = "nodsgy.com";
     const protocol = process.env.NODE_ENV === "development" ? "http" : "https"; // Use http for local dev, https for production
     let priceId;
-    if (numOfCredits == 10) {
+    if (numOfCredits == 50) {
       priceId = process.env.FIRST_CREDIT_PRICE_ID;
-    } else if (numOfCredits == 25) {
-      priceId = process.env.SECOND_CREDIT_PRICE_ID;
-    } else if (numOfCredits == 50) {
-      priceId = process.env.THIRD_CREDIT_PRICE_ID;
     } else if (numOfCredits == 100) {
-      priceId = process.env.FOURTH_CREDIT_PRICE_ID;
-    }
+      priceId = process.env.SECOND_CREDIT_PRICE_ID;
+    } else if (numOfCredits == 250) {
+      priceId = process.env.THIRD_CREDIT_PRICE_ID;
+    } 
+    // else if (numOfCredits == 100) {
+    //   priceId = process.env.FOURTH_CREDIT_PRICE_ID;
+    // }
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: [

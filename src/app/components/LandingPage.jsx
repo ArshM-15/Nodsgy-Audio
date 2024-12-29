@@ -9,6 +9,7 @@ import {
   orderBy,
   updateDoc,
   getDoc,
+  getDocs,
 } from "firebase/firestore";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
@@ -31,6 +32,8 @@ export default function LandingPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [numOfChunks, setNumOfChunks] = useState(null);
   const [isCreatingAudio, setIsCreatingAudio] = useState(false);
+  const [numOfUsers, setNumOfUsers] = useState();
+  const [numOfAudioFiles, setNumOfAudioFiles] = useState();
 
   useEffect(() => {
     setIsClient(true);
@@ -296,6 +299,23 @@ export default function LandingPage() {
     return () => clearTimeout(timer);
   }, []);
 
+  // useEffect(() => {
+  //   // Initialize Firebase
+
+  //   const fetchCounts = async () => {
+  //     try {
+  //       const usersSnapshot = await getDocs(collection(db, "users"));
+  //       setNumOfUsers(usersSnapshot.size);
+  //       const audioFilesSnapshot = await getDocs(collection(db, "audioFiles"));
+  //       setNumOfAudioFiles(audioFilesSnapshot.size);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+
+  //   fetchCounts();
+  // }, []);
+
   return (
     <div>
       <div className="animate-slideInFromBottom">
@@ -331,6 +351,12 @@ export default function LandingPage() {
           className="mx-auto translate-x-[-90px] hidden sm:block"
         />
         <ExplainAudio />
+        <h3 className="text-center font-semibold text-[35px] mt-[5rem]">
+          {/* Join <span className="text-yellow">{numOfUsers}</span> users creating{" "} */}
+          {/* <span className="text-yellow">{numOfAudioFiles}</span> audio files so */}
+          Join <span className="text-yellow">1292</span> users creating{" "}
+          <span className="text-yellow">5213</span> audio files so far!
+        </h3>
       </div>
       {/* <Script
         id="adsense-script-horizontal"

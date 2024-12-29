@@ -27,9 +27,9 @@ export default function FAQ() {
         "Each explanation is roughly 1-2 minutes long. The length of each explanation depends upon the content.",
     },
     {
-      question: "Do you offer a refund?",
+      question: "Do you issue a refund?",
       answer:
-        "We do not offer any refunds at this time.",
+        "We do not issue refunds at this time.",
     },
   ];
 
