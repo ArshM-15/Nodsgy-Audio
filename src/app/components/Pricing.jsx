@@ -239,9 +239,9 @@ export default function Pricing() {
           </button>
         </div>
       </div>
-      <h2 className="font-semibold sm:text-[25px] text-[20px] bg-faintyellow pt-5 pb-5 text-center mt-[3rem] group">
+      {/* <h2 className="font-semibold sm:text-[25px] text-[20px] bg-faintyellow pt-5 pb-5 text-center mt-[3rem] group">
         <span className="mx-5">We do not issue refunds at this time</span>
-      </h2>
+      </h2> */}
     </div>
   );
 }
