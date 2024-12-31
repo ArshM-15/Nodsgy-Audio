@@ -13,6 +13,7 @@ export default function About() {
       window.scrollTo({ top: navbarPosition, behavior: "smooth" });
     }
   };
+
   return (
     <div className="mt-[11rem]" id="about">
       <div>
@@ -27,6 +28,20 @@ export default function About() {
           A little more about Nodsgy
         </h2>
       </div>
+
+      {/* Embedded YouTube Video */}
+      <div className="mt-10 flex justify-center  shadow-[0px_0px_10px_3px_rgba(0,0,0,0.15)] px-3 py-3 rounded-2xl sm:w-fit w-5rem mx-auto">
+        <iframe
+          width="557"
+          height="315"
+          src="https://www.youtube.com/embed/sw-EmYm1-iw?autoplay=1&mute=1&loop=1&playlist=sw-EmYm1-iw"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
+
       <div className="md:mt-[5rem] w-[80%] mx-auto text-black font-semibold sm:text-[25px] text-[22px]">
         <div className="my-5 md:flex w-[100%] justify-between items-center">
           <div className="md:w-[45%] text-center md:text-left">
