@@ -8,7 +8,7 @@ import Head from "next/head";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Learn difficult concepts in seconds - Nodsgy",
+  title: "Learn Math, Physics, Chemistry, Biology, Economics, Business with a simplified approach - Nodsgy",
   description:
     "Nodsgy is developed so you can easily understand difficult concepts from your studies. All you have to do is upload your PDF, PowerPoint, or Slides, and Nodsgy will convert them into the simplest explanations you've ever heard.",
 };
