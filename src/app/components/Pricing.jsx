@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { getAuth } from "firebase/auth";
+import { getFirestore, doc, updateDoc, increment } from "firebase/firestore";
+import { app } from "../firebase/config"; // Assuming this is the correct path
 
 export default function Pricing() {
   const handleCheckout = async (numOfCredits) => {
@@ -14,6 +16,12 @@ export default function Pricing() {
     }
 
     try {
+      // Update Firestore analytics before proceeding
+      const db = getFirestore(app);
+      const analyticsDocRef = doc(db, "other-analytics", "numOfTimesClicked");
+      await updateDoc(analyticsDocRef, {
+        buyButton: increment(1), // Increment the buyButton field by 1
+      });
       // Call your API to create the checkout session
       const response = await fetch("/api/checkout", {
         method: "POST",
@@ -35,7 +43,10 @@ export default function Pricing() {
         console.error("Error creating checkout session:", session);
       }
     } catch (error) {
-      console.error("Error during checkout:", error.message);
+      console.error(
+        "Error during checkout or updating analytics:",
+        error.message
+      );
     }
   };
 
@@ -190,9 +201,10 @@ export default function Pricing() {
           <p className="text-center mb-[1rem] font-normal text-[20px]">
             $0.10 per audio
           </p>
-          <button className="bg-yellow py-1.5 px-4 rounded-3xl cursor-pointer"
+          <button
+            className="bg-yellow py-1.5 px-4 rounded-3xl cursor-pointer"
             onClick={() => handleCheckout(50)}
-            >
+          >
             Buy for $5
           </button>
         </div>
@@ -211,9 +223,10 @@ export default function Pricing() {
           <p className="text-center mb-[1rem] font-normal text-[20px]">
             $0.09 per audio
           </p>
-          <button className="bg-yellow py-1.5 px-4 rounded-3xl cursor-pointer"
+          <button
+            className="bg-yellow py-1.5 px-4 rounded-3xl cursor-pointer"
             onClick={() => handleCheckout(100)}
-            >
+          >
             Buy for $9
           </button>
         </div>
@@ -232,9 +245,10 @@ export default function Pricing() {
           <p className="text-center mb-[1rem] font-normal text-[20px]">
             $0.08 per audio
           </p>
-          <button className="bg-yellow py-1.5 px-4 rounded-3xl cursor-pointer"
+          <button
+            className="bg-yellow py-1.5 px-4 rounded-3xl cursor-pointer"
             onClick={() => handleCheckout(250)}
-            >
+          >
             Buy for $20
           </button>
         </div>
