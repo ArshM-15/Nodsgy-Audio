@@ -75,7 +75,7 @@ async function createAudioForSubtopic(
             index === numOfChunks - 1
               ? "If there is anyhting else important in the text, like something that is upcoming, remind that."
               : ""
-          } The explanation must be between 160 words max. Don't go over 160 words.`,
+          } The explanation must be between 160 words max. It should be atleast 400 words long.`,
         },
         { role: "user", content: chunk },
       ],
