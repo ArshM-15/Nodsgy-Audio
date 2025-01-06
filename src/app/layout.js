@@ -37,13 +37,13 @@ export default function RootLayout({ children }) {
            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_CODE}');
           `}
         </Script>
-        <Script
+        {/* <Script
           id="adsense-script"
           strategy="afterInteractive"
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_AUTO_ADS}`}
           crossorigin="anonymous"
-        />
+        /> */}
       </head>
       <body className={montserrat.className}>
         <Navbar />

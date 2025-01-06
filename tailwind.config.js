@@ -1,16 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  // content: [
+  //   "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  //   "./components/**/*.{js,ts,jsx,tsx,mdx}",
+  //   "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+  // ],
+  content: ["./src/**/*.{html, js, ts, vue}", "./src/**/*"],
   theme: {
     extend: {
       colors: {
         yellow: "#FFE500",
         gray: "#6F6E6E",
         faintyellow: "#FEFFD7",
+        lightGray: "#E6EDE8",
         "gradient-color-one": "rgb(255, 253, 237)",
         "gradient-color-two": "rgb(255, 249, 198)",
       },
@@ -32,8 +34,9 @@ module.exports = {
         confetti: "confetti 1s ease-in-out",
       },
       screens: {
-        "aboutScreenWidth": "1000px", // Custom breakpoint at 1000px
+        aboutScreenWidth: "1000px",
       },
     },
   },
+  plugins: [],
 };

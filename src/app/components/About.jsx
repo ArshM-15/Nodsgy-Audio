@@ -15,7 +15,7 @@ export default function About() {
   };
 
   return (
-    <div className="mt-[11rem]" id="about">
+    <div className="mt-[8rem]" id="about">
       <div>
         <Image
           src="/about-title.png"
@@ -46,12 +46,11 @@ export default function About() {
         <div className="my-5 md:flex w-[100%] justify-between items-center">
           <div className="md:w-[45%] text-center md:text-left">
             <p className="font-semibold sm:text-[25px] text-[22px]">
-              Convert your notes into concise and simple audio explanations
+              Convert your questions and notes into concise and simple audio explanations
             </p>
             <p className="font-normal text-[20px] mt-5">
-              Just upload your file, and you’re all set! Nodsgy will break your
-              content down into 3-5 sub-sections, generating natural, human-like
-              audio explanations for each part. Each sub-section is then
+              Ask a question or upload your file, and you’re all set! Nodsgy will generate natural, human-like
+              audio explanations for your contnet. Each sub-section is then
               summarized into short, easy-to-follow bullet points.
             </p>
           </div>

@@ -5,17 +5,13 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
-        pathname: "**",
+        pathname: "**", // Matches all paths
       },
       {
         protocol: "https",
         hostname: "oaidalleapiprodscus.blob.core.windows.net",
-        pathname: "**",
+        pathname: "**", // Matches all paths
       },
-    ],
-    domains: [
-      "lh3.googleusercontent.com",
-      "oaidalleapiprodscus.blob.core.windows.net",
     ],
   },
 };

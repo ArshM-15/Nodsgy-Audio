@@ -19,7 +19,7 @@ export default function FAQ() {
     {
       question: "How many credits does it take to use Nodsgy each time?",
       answer:
-        "It takes 1 credit for every use. Credits can be purchased under the pricing section.",
+        "It costs 1 credit when you input text and 3 credits when you input a file. Credits can be purchased under the pricing section.",
     },
     {
       question: "How long are the explanations?",
@@ -28,11 +28,20 @@ export default function FAQ() {
     },
     {
       question: "Do you issue a refund?",
-      answer: "We do not issue refunds at this time.",
+      answer: (
+        <>
+          We do not issue refunds at this time. You can read the {" "}
+          <a href="/refund-policy" target="_blank" rel="noopener noreferrer" className="underline text-blue-600">
+            Refund Policy
+          </a>{" "}
+          to learn more.
+        </>
+      ),
     },
+
     {
       question: "Is it accurate 100% of the time?",
-      answer: "No, the AI can make mistakes, please verify the output.",
+      answer: "No, the AI can make mistakes. Please verify the output.",
     },
   ];
 

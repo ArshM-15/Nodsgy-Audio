@@ -34,10 +34,113 @@ export default function LandingPage() {
   const [isCreatingAudio, setIsCreatingAudio] = useState(false);
   const [numOfUsers, setNumOfUsers] = useState();
   const [numOfAudioFiles, setNumOfAudioFiles] = useState();
+  const [inputValue, setInputValue] = useState(null);
+  const [audioFileCreatedUsingInput, setAudioFileCreatedUsingInput] =
+    useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  // Load saved state from localStorage on initial render
+  useEffect(() => {
+    if (!isClient) return;
+
+    // Only load from localStorage if we don't have a new file or input
+    if (!selectedFile && !inputValue) {
+      const storedAudioFiles = localStorage.getItem("audioFiles");
+      const storedCustomId = localStorage.getItem("customId");
+
+      if (storedAudioFiles && storedCustomId) {
+        setAudioFiles(JSON.parse(storedAudioFiles));
+        setCustomId(storedCustomId);
+      }
+    }
+  }, [isClient, selectedFile, inputValue]);
+
+  useEffect(() => {
+    if (!isClient) return;
+
+    const storedAudioFiles = localStorage.getItem("audioFiles");
+    const storedCustomId = localStorage.getItem("customId");
+    const storedGenerationStatus = localStorage.getItem("generationStatus");
+    
+    if (storedAudioFiles && storedCustomId) {
+      const parsedAudioFiles = JSON.parse(storedAudioFiles);
+      setAudioFiles(parsedAudioFiles);
+      setCustomId(storedCustomId);
+      
+      // Check if the previous generation was incomplete
+      if (storedGenerationStatus === "incomplete") {
+        setIsGenerationIncomplete(true);
+        // Clear generation status to prevent repeated warnings
+        localStorage.removeItem("generationStatus");
+      }
+    }
+  }, [isClient]);
+
+  const clearPreviousState = () => {
+    localStorage.removeItem("audioFiles");
+    localStorage.removeItem("customId");
+    localStorage.removeItem("inputValue");
+    setAudioFiles([]);
+    setDisplayAudioFiles(false);
+  };
+
+  const handleFileChange = (event) => {
+    if (numOfCredits - 3 < 0) {
+      alert(
+        "You do not have enough credits. You can purchase credits from the pricing section."
+      );
+      return;
+    }
+
+    const file = event.target.files[0];
+    const supportedFormats = ["pptx", "xlsx", "odt", "odp", "ods", "pdf"];
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+
+    if (!supportedFormats.includes(fileExtension)) {
+      alert(
+        `File type .${fileExtension} is not supported. Please upload one of the following: pptx, xlsx, odt, odp, ods, pdf.`
+      );
+      return;
+    }
+
+    clearPreviousState();
+    setSelectedFile(file);
+    setCustomId(uuidv4());
+    setInputValue(null);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      if (numOfCredits - 1 < 0) {
+        alert(
+          "You do not have enough credits. You can purchase credits from the pricing section."
+        );
+        return;
+      }
+
+      clearPreviousState();
+      setSelectedFile(null);
+      setInputValue(event.target.value);
+      setCustomId(uuidv4());
+    }
+  };
+  // Save state to localStorage whenever it changes
+  useEffect(() => {
+    if (!isClient) return;
+
+    if (audioFiles.length > 0) {
+      localStorage.setItem("audioFiles", JSON.stringify(audioFiles));
+    }
+    if (customId) {
+      localStorage.setItem("customId", customId);
+    }
+    if (inputValue) {
+      localStorage.setItem("inputValue", inputValue);
+    }
+  }, [audioFiles, customId, inputValue, isClient]);
 
   const checkCredits = async () => {
     if (user) {
@@ -68,50 +171,53 @@ export default function LandingPage() {
     return () => unsubscribe();
   });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    if (!isClient) return;
-    const storedAudioFiles = localStorage.getItem("audioFiles");
-    if (storedAudioFiles) {
-      setAudioFiles(JSON.parse(storedAudioFiles));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isClient]);
+  // const handleFileChange = (event) => {
+  //   if (numOfCredits - 3 < 0) {
+  //     alert(
+  //       "You do not have enough credits. You can purchase credits from the pricing section."
+  //     );
+  //     return;
+  //   }
 
-  useEffect(() => {
-    if (!isClient) return;
+  //   const file = event.target.files[0];
+  //   const supportedFormats = ["pptx", "xlsx", "odt", "odp", "ods", "pdf"];
+  //   const fileExtension = file.name.split(".").pop().toLowerCase();
 
-    if (audioFiles.length == numOfChunks) {
-      localStorage.setItem("audioFiles", JSON.stringify(audioFiles));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [audioFiles, isClient]);
+  //   if (!supportedFormats.includes(fileExtension)) {
+  //     alert(
+  //       `File type .${fileExtension} is not supported. Please upload one of the following: pptx, xlsx, odt, odp, ods, pdf.`
+  //     );
+  //     return;
+  //   }
 
-  const handleFileChange = (event) => {
-    if (numOfCredits - 1 < 0) {
-      alert(
-        "You do not have enough credits. You can purchase credits from the pricing section."
-      );
-      return;
-    }
+  //   // Clear previous state when uploading a new file
+  //   localStorage.removeItem("inputValue");
+  //   setInputValue(null);
+  //   setSelectedFile(file);
+  //   const newCustomId = uuidv4();
+  //   setCustomId(newCustomId);
+  //   setAudioFiles([]);
+  // };
 
-    const file = event.target.files[0];
+  // const handleKeyPress = (event) => {
+  //   if (event.key === "Enter") {
+  //     if (numOfCredits - 1 < 0) {
+  //       alert(
+  //         "You do not have enough credits. You can purchase credits from the pricing section."
+  //       );
+  //       return;
+  //     }
 
-    const supportedFormats = ["pptx", "xlsx", "odt", "odp", "ods", "pdf"];
-
-    const fileExtension = file.name.split(".").pop().toLowerCase();
-
-    if (!supportedFormats.includes(fileExtension)) {
-      alert(
-        `File type .${fileExtension} is not supported. Please upload one of the following: pptx, xlsx, odt, odp, ods, pdf.`
-      );
-      return;
-    }
-
-    setSelectedFile(file);
-    setCustomId(uuidv4());
-    setAudioFiles([]);
-  };
+  //     const newInputValue = event.target.value;
+  //     // Clear previous state when entering new text
+  //     localStorage.removeItem("audioFiles");
+  //     setSelectedFile(null);
+  //     setInputValue(newInputValue);
+  //     const newCustomId = uuidv4();
+  //     setCustomId(newCustomId);
+  //     setAudioFiles([]);
+  //   }
+  // };
   useEffect(() => {
     if (selectedFile) {
       handleFileUpload(selectedFile);
@@ -119,6 +225,7 @@ export default function LandingPage() {
 
     async function handleFileUpload(selectedFile) {
       if (!selectedFile) return;
+
 
       // Check for local storage availability
       if (typeof Storage === "undefined") {
@@ -149,7 +256,45 @@ export default function LandingPage() {
         setNumOfChunks(titlesData.numOfChunks);
         createAudioFiles(titlesData.titles, titlesData.chunks);
       } catch (error) {
-        alert("There is an error. Refresh to retry.");
+        alert("There is an error. Refresh and retry.");
+      }
+    }
+
+    if (inputValue !== null) {
+      handleInputValue(inputValue);
+    }
+    async function handleInputValue(inputValue) {
+      if (inputValue == null) return;
+
+      // Check for local storage availability
+      if (typeof Storage === "undefined") {
+        alert("You must create an account because you have local storage off.");
+        return; // Exit the function if local storage is not available
+      }
+
+      window.scrollBy({
+        top: 500,
+        behavior: "smooth",
+      });
+
+      setLoadTitles(true);
+      const formData = new FormData();
+      formData.append("inputValue", inputValue);
+
+      try {
+        const responseTitles = await fetch("/api/audioTitles", {
+          method: "POST",
+          body: formData,
+        });
+        if (!responseTitles.ok) {
+          throw new Error("Failed to fetch audio titles.");
+        }
+        setLoadTitles(false);
+        const titlesData = await responseTitles.json();
+        setAudioFilesTitles(titlesData.titles);
+        createAudioFiles(titlesData.titles, inputValue);
+      } catch (error) {
+        alert("There is an error. Refresh and retry.");
       }
     }
 
@@ -204,6 +349,7 @@ export default function LandingPage() {
             }
           });
         }
+        setAudioFileCreatedUsingInput(true);
       } catch (error) {
         console.error("Failed to create audio files:", error);
       } finally {
@@ -211,7 +357,7 @@ export default function LandingPage() {
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedFile]);
+  }, [selectedFile, inputValue]);
 
   useEffect(() => {
     if (displayAudioFiles) {
@@ -259,10 +405,17 @@ export default function LandingPage() {
       const userDocRef = doc(db, "users", auth.currentUser.uid);
       try {
         if (numOfCredits >= 1) {
-          await updateDoc(userDocRef, {
-            credits: numOfCredits - 1,
-          });
-          setNumOfCredits(numOfCredits - 1);
+          if (!selectedFile) {
+            await updateDoc(userDocRef, {
+              credits: numOfCredits - 1,
+            });
+            setNumOfCredits(numOfCredits - 1);
+          } else {
+            await updateDoc(userDocRef, {
+              credits: numOfCredits - 3,
+            });
+            setNumOfCredits(numOfCredits - 3);
+          }
         }
       } catch (error) {
         console.error("Error updating credits:", error);
@@ -271,8 +424,13 @@ export default function LandingPage() {
     } else {
       const localCredits = parseInt(localStorage.getItem("credits"), 10) || 0;
       if (localCredits >= 1) {
-        localStorage.setItem("credits", localCredits - 1);
-        setNumOfCredits(localCredits - 1);
+        if (!selectedFile) {
+          localStorage.setItem("credits", localCredits - 1);
+          setNumOfCredits(localCredits - 1);
+        } else {
+          localStorage.setItem("credits", localCredits - 3);
+          setNumOfCredits(localCredits - 3);
+        }
       } else {
         alert("You do not have enough credits");
       }
@@ -290,6 +448,15 @@ export default function LandingPage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioFiles]);
+
+  useEffect(() => {
+    if (!audioFileCreatedUsingInput) return;
+    if (audioFileCreatedUsingInput && !selectedFile) {
+      deductCredits();
+      setAudioFileCreatedUsingInput(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [audioFileCreatedUsingInput]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -320,20 +487,32 @@ export default function LandingPage() {
     <div>
       <div className="animate-slideInFromBottom">
         <LandingPageHeader />
-        <div className="flex justify-center animate-slideInFromBottom">
-          <label
-            htmlFor="file-upload"
-            className="font-medium text-[20px] bg-yellow py-2 px-4 rounded-3xl mt-10 cursor-pointer"
-          >
-            Upload a File
-          </label>
+        <div className="animate-slideInFromBottom text-center">
           <input
-            id="file-upload"
-            type="file"
-            accept=".pdf, .pptx, .txt"
-            className="hidden"
-            onChange={handleFileChange}
+            className="w-[90%] md:w-[55%] bg-lightGray py-2 px-[1rem] rounded-3xl mt-8 focus:outline-none text-center text-[22px] font-medium"
+            placeholder='"How did WWI and WWII happen?" then press "Enter"'
+            onKeyPress={handleKeyPress}
+            maxLength={1000}
           />
+          <div className="text-gray font-semibold sm:text-[25px] text-[22px] mx-auto sm:w-[60%] w-[90%] mt-5 text-center">
+            OR
+            <br /> upload your document for a longer explanation
+          </div>
+          <div className="block mt-10">
+            <label
+              htmlFor="file-upload"
+              className="font-medium text-[20px] bg-yellow py-3 px-4 rounded-3xl mt-10 cursor-pointer"
+            >
+              Upload a File
+            </label>
+            <input
+              id="file-upload"
+              type="file"
+              accept=".pdf, .pptx, .txt"
+              className="hidden"
+              onChange={handleFileChange}
+            />
+          </div>
         </div>
         <p
           className="font-normal text-[20px] text-center mt-8 

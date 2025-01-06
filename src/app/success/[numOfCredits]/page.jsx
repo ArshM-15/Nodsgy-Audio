@@ -10,11 +10,11 @@ export default function Success() {
 
   useEffect(() => {
     if (numOfCredits == 50) {
-      setUserSpent(5.00);
+      setUserSpent(2.49);
     } else if (numOfCredits == 100) {
-      setUserSpent(9.00);
+      setUserSpent(3.99);
     } else if (numOfCredits == 250) {
-      setUserSpent(20.00);
+      setUserSpent(9.99);
     } 
     // else {
     //   setUserSpent(4.99);

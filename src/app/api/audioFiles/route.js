@@ -11,7 +11,11 @@ let numOfChunks;
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { titles, customId, chunks } = body;
+    let { titles, customId, chunks } = body;
+
+    // Convert single title/chunk to array format if needed
+    titles = Array.isArray(titles) ? titles : [titles];
+    chunks = Array.isArray(chunks) ? chunks : [chunks];
     numOfChunks = chunks.length;
 
     if (!titles || titles.length === 0) {
@@ -46,6 +50,7 @@ export async function POST(req) {
       },
     });
 
+
     return new Response(stream, { headers });
   } catch (error) {
     console.error("Error creating audio files:", error);
@@ -75,7 +80,7 @@ async function createAudioForSubtopic(
             index === numOfChunks - 1
               ? "If there is anyhting else important in the text, like something that is upcoming, remind that."
               : ""
-          } The explanation must be between 160 words max. It should be atleast 400 words long.`,
+          } The explanation must be 160 words MAX.`,
         },
         { role: "user", content: chunk },
       ],
