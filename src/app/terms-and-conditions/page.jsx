@@ -39,7 +39,7 @@ export default function TermsConditions() {
         <section class="mb-8">
           <h2 class="text-2xl font-semibold mb-4">4. Credits and Purchases</h2>
           <p class="mb-4">
-            Upon first use of the app, you will receive 4 free credits, stored
+            Upon creation of your account, you will receive 5 free credits, stored
             locally on your device. Additional credits can be purchased through
             our platform. All payments are securely processed through Stripe.
           </p>

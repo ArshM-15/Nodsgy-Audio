@@ -14,7 +14,7 @@ export default function Success() {
     } else if (numOfCredits == 100) {
       setUserSpent(3.99);
     } else if (numOfCredits == 250) {
-      setUserSpent(9.99);
+      setUserSpent(8.99);
     } 
     // else {
     //   setUserSpent(4.99);

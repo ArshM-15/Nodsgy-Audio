@@ -90,7 +90,7 @@ export default function LandingPage() {
   const handleFileChange = (event) => {
     if (numOfCredits - 3 < 0) {
       alert(
-        "You do not have enough credits. You can purchase credits from the pricing section."
+        "It costs 3 credits. You do not have enough credits. If you haven't already, accept your 5 FREE credits when you create an account. You can purchase additional credits from the pricing section."
       );
       return;
     }
@@ -116,7 +116,7 @@ export default function LandingPage() {
     if (event.key === "Enter") {
       if (numOfCredits - 1 < 0) {
         alert(
-          "You do not have enough credits. You can purchase credits from the pricing section."
+          "It costs 1 credit. You do not have enough credits. If you haven't already, accept your 5 FREE credits when you create an account. You can purchase additonal credits from the pricing section."
         );
         return;
       }
@@ -533,8 +533,8 @@ export default function LandingPage() {
         <h3 className="text-center font-semibold text-[35px] mt-[5rem]">
           {/* Join <span className="text-yellow">{numOfUsers}</span> users creating{" "} */}
           {/* <span className="text-yellow">{numOfAudioFiles}</span> audio files so */}
-          Join <span className="text-yellow">325</span> users creating{" "}
-          <span className="text-yellow">5392</span> audio files so far!
+          Join <span className="text-yellow">338</span> users creating{" "}
+          <span className="text-yellow">5481</span> audio files so far!
         </h3>
       </div>
       {/* <Script
