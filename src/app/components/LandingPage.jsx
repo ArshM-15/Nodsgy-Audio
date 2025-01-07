@@ -90,7 +90,7 @@ export default function LandingPage() {
   const handleFileChange = (event) => {
     if (numOfCredits - 3 < 0) {
       alert(
-        "It costs 3 credits. You do not have enough credits. If you haven't already, accept your 5 FREE credits when you create an account. You can purchase additional credits from the pricing section."
+        "It costs 3 credits. You do not have enough credits. You can purchase credits from the pricing section."
       );
       return;
     }
@@ -116,7 +116,7 @@ export default function LandingPage() {
     if (event.key === "Enter") {
       if (numOfCredits - 1 < 0) {
         alert(
-          "It costs 1 credit. You do not have enough credits. If you haven't already, accept your 5 FREE credits when you create an account. You can purchase additonal credits from the pricing section."
+          "It costs 1 credit. You do not have enough credits. You can purchase credits from the pricing section."
         );
         return;
       }
