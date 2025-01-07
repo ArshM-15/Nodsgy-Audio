@@ -130,7 +130,7 @@ export default function Pricing() {
             className="bg-yellow py-1.5 px-4 rounded-3xl cursor-pointer mt-[1rem]"
             onClick={() => handleCheckout(250)}
           >
-            Buy for $9.99
+            Buy for $8.99
           </button>
         </div>
       </div>
