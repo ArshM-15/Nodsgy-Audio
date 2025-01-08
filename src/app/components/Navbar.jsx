@@ -119,7 +119,7 @@ export default function Navbar() {
             email: currentUser.email,
             photoURL: currentUser.photoURL,
             createdAt: serverTimestamp(),
-            credits: credits + 5,
+            credits: credits,
             amountSpent: 0,
             amountOfTimesPayed: 0,
           });
