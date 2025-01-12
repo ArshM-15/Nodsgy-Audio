@@ -49,8 +49,8 @@ export default function Navbar() {
         if (storedCredits === null) {
           // localStorage.setItem("credits", 4);
           // setNumOfCredits(4);
-          localStorage.setItem("credits", 1);
-          setNumOfCredits(1);
+          localStorage.setItem("credits", 0);
+          setNumOfCredits(0);
         } else {
           setNumOfCredits(parseInt(storedCredits, 10));
         }
@@ -112,7 +112,7 @@ export default function Navbar() {
         if (querySnapshot.empty) {
           const storedCredits = localStorage.getItem("credits");
           // const credits = storedCredits ? parseInt(storedCredits, 10) : 4;
-          const credits = storedCredits ? parseInt(storedCredits, 10) : 1;
+          const credits = storedCredits ? parseInt(storedCredits, 10) : 0;
           const userDocRef = doc(db, "users", auth.currentUser.uid);
           await setDoc(userDocRef, {
             username: currentUser.displayName,
