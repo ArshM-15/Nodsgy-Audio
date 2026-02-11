@@ -2,6 +2,8 @@
 
 An AI-powered text-to-audio learning platform that transforms documents and questions into comprehensive audio explanations with AI-generated summaries.
 
+![Nodsgy Audio Screenshot](public/readme-ss.png)
+
 ## About
 
 Nodsgy Audio helps users learn through audio by converting educational content into spoken explanations. The platform uses OpenAI's API to:
