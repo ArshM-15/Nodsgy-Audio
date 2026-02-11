@@ -64,12 +64,12 @@ export default function LandingPage() {
     const storedAudioFiles = localStorage.getItem("audioFiles");
     const storedCustomId = localStorage.getItem("customId");
     const storedGenerationStatus = localStorage.getItem("generationStatus");
-    
+
     if (storedAudioFiles && storedCustomId) {
       const parsedAudioFiles = JSON.parse(storedAudioFiles);
       setAudioFiles(parsedAudioFiles);
       setCustomId(storedCustomId);
-      
+
       // Check if the previous generation was incomplete
       if (storedGenerationStatus === "incomplete") {
         setIsGenerationIncomplete(true);
@@ -225,7 +225,6 @@ export default function LandingPage() {
 
     async function handleFileUpload(selectedFile) {
       if (!selectedFile) return;
-
 
       // Check for local storage availability
       if (typeof Storage === "undefined") {
@@ -530,12 +529,6 @@ export default function LandingPage() {
           className="mx-auto translate-x-[-90px] hidden sm:block"
         />
         <ExplainAudio />
-        <h3 className="text-center font-semibold text-[35px] mt-[5rem]">
-          {/* Join <span className="text-yellow">{numOfUsers}</span> users creating{" "} */}
-          {/* <span className="text-yellow">{numOfAudioFiles}</span> audio files so */}
-          Join <span className="text-yellow">338</span> users creating{" "}
-          <span className="text-yellow">5481</span> audio files so far!
-        </h3>
       </div>
       {/* <Script
         id="adsense-script-horizontal"

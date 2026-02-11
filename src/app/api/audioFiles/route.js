@@ -50,7 +50,6 @@ export async function POST(req) {
       },
     });
 
-
     return new Response(stream, { headers });
   } catch (error) {
     console.error("Error creating audio files:", error);
