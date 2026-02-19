@@ -50,7 +50,7 @@ export default function About() {
             </p>
             <p className="font-normal text-[20px] mt-5">
               Ask a question or upload your file, and you’re all set! Nodsgy will generate natural, human-like
-              audio explanations for your contnet. Each sub-section is then
+              audio explanations for your content. Each sub-section is then
               summarized into short, easy-to-follow bullet points.
             </p>
           </div>
